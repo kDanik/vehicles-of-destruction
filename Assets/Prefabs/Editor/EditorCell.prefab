@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5108316316305957456}
   - component: {fileID: 3161198855528790721}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CellSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1535927739612031627}
   - component: {fileID: 8411622789840312081}
   - component: {fileID: 1518000964470538482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EditorCell
   m_TagString: EditorCell
   m_Icon: {fileID: 0}

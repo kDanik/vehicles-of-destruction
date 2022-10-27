@@ -7,15 +7,15 @@ public class EditorProcessor : MonoBehaviour
     /// Setups all joint, rigidbody and etc.
     /// </summary>
     /// <param name="placedBlocksGrid">VehicleEditor blueprint from which vehicle should be created</param>
-    public void ProcessEditorGrid(GameObject[,] placedBlocksGrid)
+    public void ProcessEditorGrid(EditorGrid editorGrid)
     {
-        placedBlocksGrid = CreateCopyOfEditorBlueprint(placedBlocksGrid);
+        GameObject[,] placedBlocksGrid = CreateCopyOfEditorBlueprint(editorGrid);
 
         GameObject vehicleParent = new("VehicleParent");
 
-        for (int y = 0; y < placedBlocksGrid.GetLength(1); y++)
+        for (int y = 0; y < editorGrid.GetGridHeight(); y++)
         {
-            for (int x = 0; x < placedBlocksGrid.GetLength(0); x++)
+            for (int x = 0; x < editorGrid.GetGridWidth(); x++)
             {
                 if (placedBlocksGrid[x, y] == null) continue;
 
@@ -24,11 +24,11 @@ public class EditorProcessor : MonoBehaviour
 
                 SetupRigidbody(block);
 
-                if (x != placedBlocksGrid.GetLength(0) - 1 && IsJointInRightDirectionAllowed(block, placedBlocksGrid[x + 1, y]))
+                if (x != editorGrid.GetGridWidth() - 1 && IsJointInRightDirectionAllowed(block, placedBlocksGrid[x + 1, y]))
                 {
                     CreateJoint(block, placedBlocksGrid[x + 1, y]);
                 }
-                if (y != placedBlocksGrid.GetLength(1) - 1 && IsJointInTopDirectionAllowed(block, placedBlocksGrid[x, y + 1]))
+                if (y != editorGrid.GetGridHeight() - 1 && IsJointInTopDirectionAllowed(block, placedBlocksGrid[x, y + 1]))
                 {
                     CreateJoint(block, placedBlocksGrid[x, y + 1]);
                 }
@@ -41,25 +41,28 @@ public class EditorProcessor : MonoBehaviour
     /// </summary>
     /// <param name="placedBlocksGrid">Editor "blueprint" of vehicle</param>
     /// <returns>copy of placedBlocksGrid</returns>
-    private GameObject[,] CreateCopyOfEditorBlueprint(GameObject[,] placedBlocksGrid)
+    private GameObject[,] CreateCopyOfEditorBlueprint(EditorGrid editorGrid)
     {
-        GameObject[,] copy = new GameObject[placedBlocksGrid.GetLength(0), placedBlocksGrid.GetLength(1)];
+        GameObject[,] copy = new GameObject[editorGrid.GetGridWidth(), editorGrid.GetGridHeight()];
 
-        for (int y = 0; y < placedBlocksGrid.GetLength(1); y++)
+        for (int y = 0; y < editorGrid.GetGridHeight(); y++)
         {
-            for (int x = 0; x < placedBlocksGrid.GetLength(0); x++)
+            for (int x = 0; x < editorGrid.GetGridWidth(); x++)
             {
-                if (placedBlocksGrid[x, y] == null) continue;
+                if (editorGrid.IsCellEmpty(x, y)) continue;
 
-                copy[x, y] = Instantiate(placedBlocksGrid[x, y]);
+                GameObject gameObjectToCopy = editorGrid.GetBlockWithoutWrapper(x, y);
+                copy[x, y] = Instantiate(gameObjectToCopy, gameObjectToCopy.transform.position, gameObjectToCopy.transform.rotation);
             }
         }
+
         return copy;
     }
 
     private void SetupRigidbody(GameObject block)
     {
         block.GetComponent<Rigidbody2D>().simulated = true;
+      //  block.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
         // activate also for child objects for more complex blocks
         if (block.transform.childCount != 0)
@@ -68,6 +71,7 @@ public class EditorProcessor : MonoBehaviour
             foreach (Transform child in block.transform)
             {
                 child.gameObject.GetComponent<Rigidbody2D>().simulated = true;
+                child.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             }
         }
 

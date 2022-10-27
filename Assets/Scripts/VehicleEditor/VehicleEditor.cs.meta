@@ -3,7 +3,10 @@ guid: 549dfc606974743b1bfc111837d0423c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - selectedObject: {instanceID: 0}
+  - blockWrapper: {fileID: 2425676639158189028, guid: 66a11a91396094e2fa25ca1749ef444b, type: 3}
+  - editorCell: {fileID: 5499740099701595544, guid: 9208672d47fc14be2a40ade6ad16216c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
