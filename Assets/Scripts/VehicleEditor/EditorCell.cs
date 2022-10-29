@@ -11,11 +11,6 @@ public class EditorCell : MonoBehaviour
         this.vehicleEditor = vehicleEditor;
     }
 
-    private void OnMouseEnter()
-    {
-  //      editorGrid.EditorCellMouseEnter(positionInEditorGrid);
-    }
-
     private void OnMouseDown()
     {
         vehicleEditor.EditorCellMouseDown(positionInEditorGrid);
@@ -29,5 +24,10 @@ public class EditorCell : MonoBehaviour
     public void OnDragOutsideOfGrid()
     {
         vehicleEditor.OnDragOutsideOfGrid(positionInEditorGrid);
+    }
+
+    public void FocusOnCell()
+    {
+        vehicleEditor.FocusOnCell(positionInEditorGrid);
     }
 }

@@ -16,7 +16,7 @@ public class VehicleEditor : MonoBehaviour
 
 
 
-    private Vector2Int focusedCellPosition;
+    private GameObject focusedBlock;
     private EditorProcessor editorProcessor;
 
     private EditorGrid editorGrid;
@@ -32,9 +32,12 @@ public class VehicleEditor : MonoBehaviour
 
     public void EditorCellMouseDown(Vector2Int positionInEditorGrid)
     {
-        if (!editorGrid.IsBlockPresent(positionInEditorGrid.x, positionInEditorGrid.y)) {
-            editorGrid.AddNewBlock(positionInEditorGrid.x, positionInEditorGrid.y, selectedObject);
-        } else
+        if (!editorGrid.IsBlockPresent(positionInEditorGrid.x, positionInEditorGrid.y))
+        {
+            GameObject newBlock = editorGrid.AddNewBlock(positionInEditorGrid.x, positionInEditorGrid.y, selectedObject);
+            ChangeFocus(focusedBlock, newBlock);
+        }
+        else
         {
             // focus on block (rotate, delete and etc menu) -- ?
         }
@@ -56,6 +59,20 @@ public class VehicleEditor : MonoBehaviour
     public void OnDragOutsideOfGrid(Vector2Int positionInEditorGrid)
     {
         editorGrid.DeleteBlock(positionInEditorGrid.x, positionInEditorGrid.y);
+    }
+
+    public void FocusOnCell(Vector2Int positionInEditorGrid)
+    {
+        ChangeFocus(focusedBlock, editorGrid.GetBlock(positionInEditorGrid.x, positionInEditorGrid.y));
+    }
+
+    private void ChangeFocus(GameObject from, GameObject to)
+    {
+        if (from != null) from.GetComponent<EditorBlock>().MakeUnfocused();
+
+        if (to != null) to.GetComponent<EditorBlock>().MakeFocused();
+
+        focusedBlock = to;
     }
 
     public void DeactivateEditor()

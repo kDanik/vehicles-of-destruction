@@ -10,7 +10,8 @@ public class EditorGrid : MonoBehaviour
     private GameObject editorCellPrefab;
     private GameObject blockWrapperPrefab;
 
-    public void InitiliazeEditorGrid(Vector2Int size, GameObject editorCellPrefab, GameObject blockWrapperPrefab) {
+    public void InitiliazeEditorGrid(Vector2Int size, GameObject editorCellPrefab, GameObject blockWrapperPrefab)
+    {
         this.editorCellPrefab = editorCellPrefab;
         this.blockWrapperPrefab = blockWrapperPrefab;
 
@@ -18,6 +19,11 @@ public class EditorGrid : MonoBehaviour
         PopulateEditorGridWithCells();
     }
 
+    /// <summary>
+    /// Deletes block at given editor grid position, removing it from the scene
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
     public void DeleteBlock(int x, int y)
     {
         if (placedBlocksGrid[x, y] != null)
@@ -27,21 +33,45 @@ public class EditorGrid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if block exists in editor grid at given position
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns>true if block present, otherwise false</returns>
     public bool IsBlockPresent(int x, int y)
     {
         return placedBlocksGrid[x, y] != null;
     }
 
+    /// <summary>
+    /// Checks if cell in editorGrid doesn't have block in it
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns>true if no block present, otherwise false</returns>
     public bool IsCellEmpty(int x, int y)
     {
         return placedBlocksGrid[x, y] == null;
     }
 
+    /// <summary>
+    /// Get block at given position
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns>return GameObject of block(with wrapper) or null if no block present</returns>
     public GameObject GetBlock(int x, int y)
     {
         return placedBlocksGrid[x, y];
     }
 
+    /// <summary>
+    /// Returns gameobject of block on given position, without wrapper object (so only block object itself)
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns>gameobject of block or null if no block present</returns>
     public GameObject GetBlockWithoutWrapper(int x, int y)
     {
         if (placedBlocksGrid[x, y] == null) return null;
@@ -49,6 +79,15 @@ public class EditorGrid : MonoBehaviour
         return placedBlocksGrid[x, y].transform.GetChild(0).gameObject;
     }
 
+
+    /// <summary>
+    /// Attempts to move block from initialPosition to newPosition in grid
+    /// </summary>
+    /// <param name="initialPositionX"></param>
+    /// <param name="initialPositionY"></param>
+    /// <param name="newPositionX"></param>
+    /// <param name="newPositionY"></param>
+    /// <returns>true if moved successfully, otherwise false</returns>
     public bool MoveBlock(int initialPositionX, int initialPositionY, int newPositionX, int newPositionY)
     {
         if (placedBlocksGrid[initialPositionX, initialPositionY] == null) return false;
@@ -65,9 +104,12 @@ public class EditorGrid : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Deletes all blocks in editorGrid
+    /// </summary>
     public void DeleteAllBlocks()
     {
-         for (int y = 0; y < placedBlocksGrid.GetLength(1); y++)
+        for (int y = 0; y < placedBlocksGrid.GetLength(1); y++)
         {
             for (int x = 0; x < placedBlocksGrid.GetLength(0); x++)
             {
@@ -76,9 +118,16 @@ public class EditorGrid : MonoBehaviour
         }
     }
 
-    public bool AddNewBlock(int x, int y, GameObject blockPrefab)
+    /// <summary>
+    /// Instantiates and adds to grid new block
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="blockPrefab"></param>
+    /// <returns>newly instantiated object or null if position is busy</returns>
+    public GameObject AddNewBlock(int x, int y, GameObject blockPrefab)
     {
-        if (placedBlocksGrid[x, y] != null) return false;
+        if (placedBlocksGrid[x, y] != null) return null;
 
         Vector2 position = editorCellGrid[x, y].transform.position;
 
@@ -89,9 +138,15 @@ public class EditorGrid : MonoBehaviour
 
         placedBlocksGrid[x, y] = newBlockWrapper;
 
-        return true;
+        return placedBlocksGrid[x, y];
     }
 
+    /// <summary>
+    /// Rotates block by 90 degrees to the left direction
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns>returns true if rotated, otherwise false</returns>
     public bool RotateBlock(int x, int y)
     {
         if (placedBlocksGrid[x, y] == null) return false;
@@ -101,11 +156,13 @@ public class EditorGrid : MonoBehaviour
         return true;
     }
 
-    public int GetGridHeight() {
+    public int GetGridHeight()
+    {
         return placedBlocksGrid.GetLength(1);
     }
 
-    public int GetGridWidth() {
+    public int GetGridWidth()
+    {
         return placedBlocksGrid.GetLength(0);
     }
 

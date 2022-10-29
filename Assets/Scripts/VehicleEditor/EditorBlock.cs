@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EditorBlock : MonoBehaviour
 {
+    private static Color focusedColor = new(0, 0, 0, 0.15f);
     private Vector2 positionDragBuffer;
     private EditorCell cellBeforeDrag;
 
     private bool isDragged = false;
+    private float waitTimeBeforeDrag = 0.2f;
+    private float dragTimer = 0;
 
 
     void OnMouseDown()
@@ -19,18 +22,24 @@ public class EditorBlock : MonoBehaviour
         if (editorCell != null)
         {
             cellBeforeDrag = FindEditorCell();
+            editorCell.FocusOnCell();
         }
     }
 
     void OnMouseDrag()
     {
-        // TODO maybe add delay to drag?
+        if (!isDragged)
+        {
+            dragTimer += Time.deltaTime;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f;
-        transform.position = mousePos;
-
-        isDragged = true;
+            if (dragTimer > waitTimeBeforeDrag) isDragged = true;
+        }
+        else
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0f;
+            transform.position = mousePos;
+        }
     }
 
     void OnMouseUp()
@@ -38,6 +47,23 @@ public class EditorBlock : MonoBehaviour
         if (isDragged) OnDragStop();
 
         isDragged = false;
+        dragTimer = 0;
+    }
+
+
+    public void MakeFocused()
+    {
+        GetComponent<SpriteRenderer>().color = focusedColor;
+    }
+
+    public void MakeUnfocused()
+    {
+        GetComponent<SpriteRenderer>().color = Color.clear;
+    }
+
+    public void DragFail()
+    {
+        transform.position = positionDragBuffer;
     }
 
     private void OnDragStop()
@@ -54,12 +80,7 @@ public class EditorBlock : MonoBehaviour
         }
     }
 
-    public void DragFail()
-    {
-        transform.position = positionDragBuffer;
-    }
-
-    public EditorCell FindEditorCell()
+    private EditorCell FindEditorCell()
     {
         int layerMask = LayerMask.GetMask("Editor Cell");
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 10, layerMask);
@@ -67,7 +88,7 @@ public class EditorBlock : MonoBehaviour
         if (hit.collider != null)
         {
             EditorCell editorCell = hit.collider.gameObject.GetComponent<EditorCell>();
-            Debug.Log(hit.collider.gameObject.name);
+
             return editorCell;
         }
 

@@ -62,7 +62,7 @@ public class EditorProcessor : MonoBehaviour
     private void SetupRigidbody(GameObject block)
     {
         block.GetComponent<Rigidbody2D>().simulated = true;
-      //  block.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        //  block.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
         // activate also for child objects for more complex blocks
         if (block.transform.childCount != 0)
