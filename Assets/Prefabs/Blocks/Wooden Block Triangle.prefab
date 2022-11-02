@@ -154,3 +154,5 @@ MonoBehaviour:
   allowBottomJoint: 0
   jointBreakForce: 600
   jointBreakTorque: 600
+  blockTypeName: Wooden Block Triangle
+  blockUISprite: {fileID: 2012642607, guid: 7f7b700c965ca46f09c10a91edf48d7e, type: 3}

@@ -9,11 +9,13 @@ public class EditorGrid : MonoBehaviour
 
     private GameObject editorCellPrefab;
     private GameObject blockWrapperPrefab;
+    private EditorBlockSelection editorBlockSelection;
 
-    public void InitiliazeEditorGrid(Vector2Int size, GameObject editorCellPrefab, GameObject blockWrapperPrefab)
+    public void InitiliazeEditorGrid(Vector2Int size, GameObject editorCellPrefab, GameObject blockWrapperPrefab, EditorBlockSelection editorBlockSelection)
     {
         this.editorCellPrefab = editorCellPrefab;
         this.blockWrapperPrefab = blockWrapperPrefab;
+        this.editorBlockSelection = editorBlockSelection;
 
         InitializeGrids(size);
         PopulateEditorGridWithCells();
@@ -28,6 +30,8 @@ public class EditorGrid : MonoBehaviour
     {
         if (placedBlocksGrid[x, y] != null)
         {
+            editorBlockSelection.OnRemoveBlockFromEditorGrid(GetBlockWithoutWrapper(x, y));
+
             Destroy(placedBlocksGrid[x, y]);
             placedBlocksGrid[x, y] = null;
         }
@@ -128,6 +132,8 @@ public class EditorGrid : MonoBehaviour
     public GameObject AddNewBlock(int x, int y, GameObject blockPrefab)
     {
         if (placedBlocksGrid[x, y] != null) return null;
+
+        editorBlockSelection.OnAddBlockToEditorGrid(blockPrefab);
 
         Vector2 position = editorCellGrid[x, y].transform.position;
 

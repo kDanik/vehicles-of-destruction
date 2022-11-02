@@ -223,6 +223,8 @@ MonoBehaviour:
   allowBottomJoint: 0
   jointBreakForce: 600
   jointBreakTorque: 600
+  blockTypeName: Wooden Wheel
+  blockUISprite: {fileID: 497038505, guid: 260a1b9311aef4da588431dd0208c6fb, type: 3}
 --- !u!212 &4314985752056451388
 SpriteRenderer:
   m_ObjectHideFlags: 0

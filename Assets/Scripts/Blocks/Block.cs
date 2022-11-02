@@ -10,6 +10,9 @@ public class Block : MonoBehaviour
     public int jointBreakForce;
     public int jointBreakTorque;
 
+    public string blockTypeName;
+    public Sprite blockUISprite;
+
     /// <summary>
     /// Rotates block by 90 degrees to the left direction and updates its allowed joints configuration
     /// </summary>
