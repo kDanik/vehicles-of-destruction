@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// This class stores editor grid blocks and methods to change it
+/// </summary>
 public class EditorGrid : MonoBehaviour
 {
     private GameObject[,] editorCellGrid;
