@@ -1,9 +1,15 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls state of the scene(vehicle editor --- playtime).
+/// Togles UI, resets dynamic objects, generates vehicle and etc.
+/// </summary>
 public class SceneStateManager : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("All dynamic scene objects should be child objects of this dynamic object!")]
     private GameObject dynamicObjects;
+
     private GameObject dynamicObjectsBuffer;
 
     private VehicleEditor editor;

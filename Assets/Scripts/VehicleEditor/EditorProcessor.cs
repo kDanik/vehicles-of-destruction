@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// This class process editor grid and generates vehicle from it
+/// </summary>
 public class EditorProcessor : MonoBehaviour
 {
     /// <summary>
@@ -62,7 +65,6 @@ public class EditorProcessor : MonoBehaviour
     private void SetupRigidbody(GameObject block)
     {
         block.GetComponent<Rigidbody2D>().simulated = true;
-        //  block.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
         // activate also for child objects for more complex blocks
         if (block.transform.childCount != 0)
@@ -71,7 +73,6 @@ public class EditorProcessor : MonoBehaviour
             foreach (Transform child in block.transform)
             {
                 child.gameObject.GetComponent<Rigidbody2D>().simulated = true;
-                child.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             }
         }
 
@@ -102,8 +103,8 @@ public class EditorProcessor : MonoBehaviour
         Block blockScript2 = block2.GetComponent<Block>();
 
         // use minimum joint break force / torque from 2 blocks. (TODO Maybe average strength would be more logical in future)
-        joint.breakForce = blockScript1.jointBreakForce > blockScript2.jointBreakForce ? blockScript2.jointBreakForce : blockScript1.jointBreakForce;
-        joint.breakTorque = blockScript1.jointBreakTorque > blockScript2.jointBreakTorque ? blockScript2.jointBreakTorque : blockScript1.jointBreakTorque;
+        joint.breakForce = blockScript1.JointBreakForce > blockScript2.JointBreakForce ? blockScript2.JointBreakForce : blockScript1.JointBreakForce;
+        joint.breakTorque = blockScript1.JointBreakTorque > blockScript2.JointBreakTorque ? blockScript2.JointBreakTorque : blockScript1.JointBreakTorque;
     }
 
     /// <summary>
@@ -117,7 +118,7 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        return block1.GetComponent<Block>().allowTopJoint && block2.GetComponent<Block>().allowBottomJoint;
+        return block1.GetComponent<Block>().AllowTopJoint && block2.GetComponent<Block>().AllowBottomJoint;
     }
 
     /// <summary>
@@ -131,6 +132,6 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        return block1.GetComponent<Block>().allowRightJoint && block2.GetComponent<Block>().allowLeftJoint;
+        return block1.GetComponent<Block>().AllowRightJoint && block2.GetComponent<Block>().AllowLeftJoint;
     }
 }

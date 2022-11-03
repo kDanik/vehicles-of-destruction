@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0df4cba9c73146b6b619215bc0d8add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowTopJoint: 1
-  allowLeftJoint: 0
-  allowRightJoint: 1
-  allowBottomJoint: 0
-  jointBreakForce: 600
-  jointBreakTorque: 600
-  blockTypeName: Wooden Block Triangle
-  blockUISprite: {fileID: 2012642607, guid: 7f7b700c965ca46f09c10a91edf48d7e, type: 3}
+  AllowTopJoint: 1
+  AllowLeftJoint: 0
+  AllowRightJoint: 1
+  AllowBottomJoint: 0
+  JointBreakForce: 600
+  JointBreakTorque: 600
+  BlockTypeName: Wooden Block Triangle
+  BlockUISprite: {fileID: 2012642607, guid: 7f7b700c965ca46f09c10a91edf48d7e, type: 3}

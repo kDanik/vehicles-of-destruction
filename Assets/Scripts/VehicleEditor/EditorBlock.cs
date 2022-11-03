@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script is attached to block wrapper, that helps to separate editor logic from type of blocks, their colliders and configuration.
+/// Each block has same wrapper attached to it while in editor mode.
+/// </summary>
 public class EditorBlock : MonoBehaviour
 {
-    private static Color focusedColor = new(0, 0, 0, 0.15f);
     private Vector2 positionDragBuffer;
     private EditorCell cellBeforeDrag;
 
@@ -12,6 +13,7 @@ public class EditorBlock : MonoBehaviour
     private float waitTimeBeforeDrag = 0.2f;
     private float dragTimer = 0;
 
+    private static Color colorWhenFocused = new(0, 0, 0, 0.15f);
 
     void OnMouseDown()
     {
@@ -50,22 +52,6 @@ public class EditorBlock : MonoBehaviour
         dragTimer = 0;
     }
 
-
-    public void MakeFocused()
-    {
-        GetComponent<SpriteRenderer>().color = focusedColor;
-    }
-
-    public void MakeUnfocused()
-    {
-        GetComponent<SpriteRenderer>().color = Color.clear;
-    }
-
-    public void DragFail()
-    {
-        transform.position = positionDragBuffer;
-    }
-
     private void OnDragStop()
     {
         EditorCell editorCell = FindEditorCell();
@@ -76,10 +62,34 @@ public class EditorBlock : MonoBehaviour
         }
         else
         {
-            FindEditorCell().OnBlockDraggedAction(gameObject, cellBeforeDrag.positionInEditorGrid);
+            FindEditorCell().OnBlockDraggedAction(gameObject, cellBeforeDrag.PositionInEditorGrid);
         }
     }
+    /// <summary>
+    /// Changes appearance of EditorBlock to focused state
+    /// </summary>
+    public void MakeFocused()
+    {
+        GetComponent<SpriteRenderer>().color = colorWhenFocused;
+    }
 
+    /// <summary>
+    /// Changes appearance of EditorBlock to unfocused (default) state
+    /// </summary>
+    public void MakeUnfocused()
+    {
+        GetComponent<SpriteRenderer>().color = Color.clear;
+    }
+
+    public void DragFail()
+    {
+        transform.position = positionDragBuffer;
+    }
+
+    /// <summary>
+    /// Find editor cell that mouse(or finger input) currently hovers over
+    /// </summary>
+    /// <returns>EditorCell of editor cell or null if none found</returns>
     private EditorCell FindEditorCell()
     {
         int layerMask = LayerMask.GetMask("Editor Cell");

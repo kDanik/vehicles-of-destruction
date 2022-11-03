@@ -3,22 +3,25 @@ using UnityEngine;
 public class VehicleEditor : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("Prefab of block wrapper for editor")]
     private GameObject blockWrapper;
+    [SerializeField]
+    [Tooltip("Prefab of editor cell of editor grid")]
+    private GameObject editorCell;
 
     [SerializeField]
-    private GameObject editorCell;
-    [SerializeField]
+    [Tooltip("Editor width in blocks")]
     private int editorWidth;
+
     [SerializeField]
+    [Tooltip("Editor height in blocks")]
     private int editorHeight;
 
     private bool isFocused = false;
     private Vector2Int focusPositionInGrid;
 
     private EditorProcessor editorProcessor;
-
     private EditorGrid editorGrid;
-
     private EditorBlockSelection editorBlockSelection;
 
 
@@ -110,11 +113,14 @@ public class VehicleEditor : MonoBehaviour
 
     private void ResetFocus()
     {
-        GameObject currentFocus = editorGrid.GetBlock(focusPositionInGrid.x, focusPositionInGrid.y);
+        if (isFocused)
+        {
+            GameObject currentFocus = editorGrid.GetBlock(focusPositionInGrid.x, focusPositionInGrid.y);
 
-        if (currentFocus != null) currentFocus.GetComponent<EditorBlock>().MakeUnfocused();
+            if (currentFocus != null) currentFocus.GetComponent<EditorBlock>().MakeUnfocused();
 
-        isFocused = false;
-        focusPositionInGrid = new Vector2Int(-1, -1);
+            isFocused = false;
+            focusPositionInGrid = new Vector2Int(-1, -1);
+        }
     }
 }

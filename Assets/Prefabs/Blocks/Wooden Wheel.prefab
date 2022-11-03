@@ -217,14 +217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0df4cba9c73146b6b619215bc0d8add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowTopJoint: 1
-  allowLeftJoint: 0
-  allowRightJoint: 0
-  allowBottomJoint: 0
-  jointBreakForce: 600
-  jointBreakTorque: 600
-  blockTypeName: Wooden Wheel
-  blockUISprite: {fileID: 497038505, guid: 260a1b9311aef4da588431dd0208c6fb, type: 3}
+  AllowTopJoint: 1
+  AllowLeftJoint: 0
+  AllowRightJoint: 0
+  AllowBottomJoint: 0
+  JointBreakForce: 600
+  JointBreakTorque: 600
+  BlockTypeName: Wooden Wheel
+  BlockUISprite: {fileID: 497038505, guid: 260a1b9311aef4da588431dd0208c6fb, type: 3}
 --- !u!212 &4314985752056451388
 SpriteRenderer:
   m_ObjectHideFlags: 0
