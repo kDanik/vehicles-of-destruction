@@ -8,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public class EditorCell : MonoBehaviour
 {
+    /// <summary>
+    /// Position in editor grid array. See EditorGrid.
+    /// </summary>
     public Vector2Int PositionInEditorGrid;
     private VehicleEditor vehicleEditor;    
 

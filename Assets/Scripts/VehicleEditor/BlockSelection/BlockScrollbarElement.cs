@@ -59,5 +59,6 @@ public class BlockScrollbarElement : MonoBehaviour
     private void SetBlockSprite(Sprite blockUISprite)
     {
         blockImage.sprite = blockUISprite;
+        blockImage.preserveAspect = true;
     }
 }
