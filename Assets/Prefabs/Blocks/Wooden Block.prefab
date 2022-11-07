@@ -104,7 +104,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -151,6 +151,6 @@ MonoBehaviour:
   AllowRightJoint: 1
   AllowBottomJoint: 1
   JointBreakForce: 600
-  JointBreakTorque: 600
+  JointBreakTorque: 1000
   BlockTypeName: Wooden Block
   BlockUISprite: {fileID: -1741328940, guid: f3b69d93bde254de99afa334d1b0e418, type: 3}
