@@ -274,7 +274,7 @@ MonoBehaviour:
   - block: {fileID: 4250765640128295589, guid: b1d0551f1701442f0b5dca5d4e5ace52, type: 3}
     count: 4
   - block: {fileID: 6412738775131923550, guid: 673b26d5040ef4e70a9134cf9816d794, type: 3}
-    count: 4
+    count: 20
   - block: {fileID: 8702450637185090464, guid: 9804240161ba144da919df7021ac182a, type: 3}
     count: 4
   baseBlockUIPrefab: {fileID: 2511184181777711340, guid: 2b732118bb3154107a6089cf0ff42579, type: 3}

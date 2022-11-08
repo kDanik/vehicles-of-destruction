@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6360740276277318294}
   - component: {fileID: 2968152663498477212}
   - component: {fileID: 7879846985200663306}
+  - component: {fileID: 8777941957805115450}
   - component: {fileID: 6608956281510895484}
   m_Layer: 0
   m_Name: TNT
@@ -130,9 +131,22 @@ MonoBehaviour:
   AllowRightJoint: 1
   AllowBottomJoint: 1
   JointBreakForce: 600
-  JointBreakTorque: 600
+  JointBreakTorque: 1000
   BlockTypeName: TNT
   BlockUISprite: {fileID: 2035100819, guid: d0ac10fb28ed64761a079a8181e21753, type: 3}
+--- !u!114 &8777941957805115450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412738775131923550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99360c7b26c541cf8a684914c30eb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceToExplode: 15
 --- !u!50 &6608956281510895484
 Rigidbody2D:
   serializedVersion: 4
