@@ -27,7 +27,7 @@ public class TNT : AbstractExplodable
             Rigidbody2D rigidbody2D = collider.gameObject.GetComponent<Rigidbody2D>();
             if (rigidbody2D != null)
             {
-                Rigidbody2DExtensions.AddExplosionForce(rigidbody2D, 1000f, transform.position, 10f, 2f);
+                Rigidbody2DExtensions.AddExplosionForce(rigidbody2D, 3000f, transform.position, 10f, 0.2f);
             }
 
         }

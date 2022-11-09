@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0df4cba9c73146b6b619215bc0d8add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllowTopJoint: 1
-  AllowLeftJoint: 1
-  AllowRightJoint: 1
-  AllowBottomJoint: 1
+  AllowTopJoint: 0
+  AllowLeftJoint: 0
+  AllowRightJoint: 0
+  AllowBottomJoint: 0
   JointBreakForce: 600
   JointBreakTorque: 1000
   BlockTypeName: TNT
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99360c7b26c541cf8a684914c30eb61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceToExplode: 15
+  forceToExplode: 6
 --- !u!50 &6608956281510895484
 Rigidbody2D:
   serializedVersion: 4
