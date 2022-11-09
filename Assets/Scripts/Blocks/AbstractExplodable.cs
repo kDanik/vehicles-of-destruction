@@ -7,6 +7,18 @@ using UnityEngine;
 /// </summary>
 public abstract class AbstractExplodable : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("Maximum force of explosion. Force will slowly decrease depending on distance from explosion")]
+    private float explosionForce;
+
+    [SerializeField]
+    [Tooltip("Maximum radius of explosion. Changes distance of affected objects, aswell as decreasing distance wearoff.")]
+    private float explosionRadius;
+
+    [SerializeField]
+    [Tooltip("Modifier of final force from explosion in up direction. Changes overrall direction of force vector applied from explosion.")]
+    private float explosionUpwardModifier;
+
     /// <summary>
     /// This variable is used to prevent infinite loops with objects exploading each other forever
     /// </summary>
@@ -15,7 +27,7 @@ public abstract class AbstractExplodable : MonoBehaviour
     /// <summary>
     /// Implementation of actual explosion method. AVOID Calling this method directly. Use Explode() inteads
     /// </summary>
-    protected abstract void ExplodeImplementation();
+    protected abstract void ExplodeImplementation(float explosionForce, float explosionRadius, float explosionUpwardModifier);
 
     /// <summary>
     /// Main method for starting explosion. Always use this method instead Explode() directly 
@@ -42,7 +54,7 @@ public abstract class AbstractExplodable : MonoBehaviour
     {
         WasExploded = true;
 
-        ExplodeImplementation();
+        ExplodeImplementation(explosionForce, explosionRadius, explosionUpwardModifier);
     }
 
     /// <summary>
@@ -79,6 +91,6 @@ public abstract class AbstractExplodable : MonoBehaviour
 
         yield return new WaitForSeconds(seconds);
 
-        ExplodeImplementation();
+        ExplodeImplementation(explosionForce, explosionRadius, explosionUpwardModifier);
     }
 }

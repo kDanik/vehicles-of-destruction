@@ -146,6 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99360c7b26c541cf8a684914c30eb61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionForce: 3000
+  explosionRadius: 10
+  explosionUpwardModifier: 0.2
   forceToExplode: 6
 --- !u!50 &6608956281510895484
 Rigidbody2D:

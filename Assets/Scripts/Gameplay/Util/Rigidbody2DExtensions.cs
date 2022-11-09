@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> 
+/// This class contains Rigidbody AddExplosionForce() alternative, but for Rigidbody2D
+/// </summary>
 public static class Rigidbody2DExtensions
 {
-    private static float randomForceVariation = 0.1f;
+    private static readonly float randomForceVariation = 0.10f;
 
     /// <summary>
     /// Calculates and simulates explosion force applied to given rigidbody2D with given explosion data
