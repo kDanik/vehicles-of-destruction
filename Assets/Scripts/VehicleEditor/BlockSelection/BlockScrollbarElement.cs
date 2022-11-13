@@ -20,6 +20,9 @@ public class BlockScrollbarElement : MonoBehaviour
 
     private EditorBlockSelection editorBlockSelection;
 
+    private bool isBlockCountZero = false;
+    private bool isSelected = false;
+
     public void Initialize(int blockIndex, Sprite blockUISprite, int blockCount, EditorBlockSelection editorBlockSelection)
     {
         this.blockIndex = blockIndex;
@@ -48,12 +51,46 @@ public class BlockScrollbarElement : MonoBehaviour
 
         if (newBlockCount == 0)
         {
+            isBlockCountZero = true;
             blockImage.color = Color.gray;
         }
         else
         {
-            blockImage.color = Color.white;
+            isBlockCountZero = false;
+
+            if (isSelected)
+            {
+                ActivateSelectedAppereance();
+            }
+            else
+            {
+                blockImage.color = Color.white;
+            }
         }
+    }
+
+    /// <summary>
+    /// Deactivates image selected appereance (changes color to default)
+    /// </summary>
+    public void DeactivateSelectedAppereance()
+    {
+        isSelected = false;
+
+        if (isBlockCountZero) return;
+
+        blockImage.color = Color.white;
+    }
+
+    /// <summary>
+    /// Activates image selected appereance (add hightlight color)
+    /// </summary>
+    public void ActivateSelectedAppereance()
+    {
+        isSelected = true;
+
+        if (isBlockCountZero) return;
+
+        blockImage.color = Color.yellow;
     }
 
     private void SetBlockSprite(Sprite blockUISprite)

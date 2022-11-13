@@ -35,7 +35,7 @@ public class EditorBlockSelection : MonoBehaviour
 
     private BlockScrollbarElement[] editorBlockUIElements;
 
-    private int selectedBlockIndex;
+    private int selectedBlockIndex = -1;
 
 
     private void Start()
@@ -51,16 +51,10 @@ public class EditorBlockSelection : MonoBehaviour
     /// <param name="removedBlock">Block that was removed from editor grid (or its prefab)</param>
     public void OnRemoveBlockFromEditorGrid(GameObject removedBlock)
     {
-        for (int i = 0; i < editorBlocks.Length; i++)
-        {
-            if (IsOfSamePrefabType(editorBlocks[i].block, removedBlock))
-            {
-                editorBlocks[i] = new EditorBlock(editorBlocks[i].block, editorBlocks[i].count + 1);
-                editorBlockUIElements[i].UpdateBlockCount(editorBlocks[i].count);
+        int index = FindIndexByPrefabType(removedBlock);
 
-                return;
-            }
-        }
+        editorBlocks[index] = new EditorBlock(editorBlocks[index].block, editorBlocks[index].count + 1);
+        editorBlockUIElements[index].UpdateBlockCount(editorBlocks[index].count);
     }
 
     /// <summary>
@@ -70,16 +64,10 @@ public class EditorBlockSelection : MonoBehaviour
     /// <param name="removedBlock">Block that was added to editor grid (or its prefab)</param>
     public void OnAddBlockToEditorGrid(GameObject addedBlock)
     {
-        for (int i = 0; i < editorBlocks.Length; i++)
-        {
-            if (IsOfSamePrefabType(editorBlocks[i].block, addedBlock))
-            {
-                editorBlocks[i] = new EditorBlock(editorBlocks[i].block, editorBlocks[i].count - 1);
-                editorBlockUIElements[i].UpdateBlockCount(editorBlocks[i].count);
+        int index = FindIndexByPrefabType(addedBlock);
 
-                return;
-            }
-        }
+        editorBlocks[index] = new EditorBlock(editorBlocks[index].block, editorBlocks[index].count - 1);
+        editorBlockUIElements[index].UpdateBlockCount(editorBlocks[index].count);
     }
 
     /// <summary>
@@ -87,6 +75,8 @@ public class EditorBlockSelection : MonoBehaviour
     /// </summary>
     public bool CanSelectedBlockBeSpawned()
     {
+        if (selectedBlockIndex < 0) return false;
+
         return editorBlocks[selectedBlockIndex].count > 0;
     }
 
@@ -99,10 +89,16 @@ public class EditorBlockSelection : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates index of currently selected block
+    /// Updates currently selected block
     /// </summary>
     public void ChangeSelectedBlockIndex(int newSelectedBlockIndex)
     {
+        if (selectedBlockIndex != -1)
+        {
+            editorBlockUIElements[selectedBlockIndex].DeactivateSelectedAppereance();
+        }
+        editorBlockUIElements[newSelectedBlockIndex].ActivateSelectedAppereance();
+
         selectedBlockIndex = newSelectedBlockIndex;
     }
 
@@ -131,5 +127,18 @@ public class EditorBlockSelection : MonoBehaviour
     private bool IsOfSamePrefabType(GameObject block1, GameObject block2)
     {
         return block1.GetComponent<Block>().BlockTypeName.Equals(block2.GetComponent<Block>().BlockTypeName);
+    }
+
+    private int FindIndexByPrefabType(GameObject block)
+    {
+        for (int i = 0; i < editorBlocks.Length; i++)
+        {
+            if (IsOfSamePrefabType(editorBlocks[i].block, block))
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

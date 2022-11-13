@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2590600669427900109}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2590600669893066535}
@@ -209,7 +209,7 @@ WheelJoint2D:
   m_BreakForce: 5000
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: -0.07}
+  m_Anchor: {x: 0, y: -0.05}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_Suspension:
     m_DampingRatio: 1
