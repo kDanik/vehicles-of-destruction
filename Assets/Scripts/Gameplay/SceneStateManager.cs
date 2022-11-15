@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class SceneStateManager : MonoBehaviour
 {
+    private static SceneState sceneState;
+
     [SerializeField]
     [Tooltip("All dynamic scene objects should be child objects of this dynamic object!")]
     private GameObject dynamicObjects;
@@ -19,6 +21,8 @@ public class SceneStateManager : MonoBehaviour
         editor = gameObject.GetComponent<VehicleEditor>();
         dynamicObjectsBuffer = Instantiate(dynamicObjects);
         dynamicObjectsBuffer.SetActive(false);
+
+        sceneState = SceneState.EDITOR;
     }
 
     /// <summary>
@@ -26,6 +30,8 @@ public class SceneStateManager : MonoBehaviour
     /// </summary>
     public void SwitchToEditorMode()
     {
+        sceneState = SceneState.EDITOR;
+
         ReloadDynamicObjects();
         DestroyVehicle();
         editor.ActivateEditor();
@@ -36,6 +42,8 @@ public class SceneStateManager : MonoBehaviour
     /// </summary>
     public void SwitchToPlayMode()
     {
+        sceneState = SceneState.PLAYMODE;
+
         editor.ProcessEditorGrid();
         editor.DeactivateEditor();
     }
@@ -62,5 +70,15 @@ public class SceneStateManager : MonoBehaviour
     private void DestroyVehicle()
     {
         Destroy(GameObject.Find("VehicleParent"));
+    }
+
+    public static bool IsEditorMode()
+    {
+        return sceneState == SceneState.EDITOR;
+    }
+
+    public static bool IsPlaymode()
+    {
+        return sceneState == SceneState.PLAYMODE;
     }
 }

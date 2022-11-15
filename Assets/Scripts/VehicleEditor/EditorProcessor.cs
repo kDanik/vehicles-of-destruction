@@ -72,7 +72,9 @@ public class EditorProcessor : MonoBehaviour
 
             foreach (Transform child in block.transform)
             {
-                child.gameObject.GetComponent<Rigidbody2D>().simulated = true;
+                Rigidbody2D childRigidbody2D = child.gameObject.GetComponent<Rigidbody2D>();
+
+                if (childRigidbody2D != null) childRigidbody2D.simulated = true;
             }
         }
 
