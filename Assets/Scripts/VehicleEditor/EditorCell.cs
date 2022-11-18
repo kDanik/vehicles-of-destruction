@@ -12,7 +12,7 @@ public class EditorCell : MonoBehaviour
     /// Position in editor grid array. See EditorGrid.
     /// </summary>
     public Vector2Int PositionInEditorGrid;
-    private VehicleEditor vehicleEditor;    
+    private VehicleEditor vehicleEditor;
 
     public void Initialize(Vector2Int positionInEditorGrid, VehicleEditor vehicleEditor)
     {

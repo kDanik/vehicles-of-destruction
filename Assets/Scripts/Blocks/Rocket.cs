@@ -4,23 +4,23 @@ using UnityEngine.Rendering.Universal;
 public class Rocket : AbstractExplodable
 {
     [SerializeField]
-    [Tooltip("collision force that block will explode from")]
+    [Tooltip("Collision force, from which block will explode")]
     private float forceToExplode;
 
     [SerializeField]
-    [Tooltip("Rocket speed / force")]
+    [Tooltip("Rocket speed / add force")]
     private int speed = 100;
 
     [SerializeField]
-    [Tooltip("Duration for rocket active phase")]
+    [Tooltip("Duration of rocket active phase")]
     private float durationSeconds;
 
     [SerializeField]
-    [Tooltip("Duration before shader on rocket is fully active. Only affect the visuals!")]
+    [Tooltip("Duration before shader (see Rocket shader graph) on rocket is fully active. Only affect the visuals!")]
     private float durationBeforeMaxTemreture;
 
     [SerializeField]
-    [Tooltip("Randon speed variation (from -randomSpeedVariation to randomSpeedVariation)")]
+    [Tooltip("Random rocket speed variationx (from -randomSpeedVariation to randomSpeedVariation)")]
     private float randomSpeedVariation = 0.1f;
 
     [SerializeField]
@@ -31,7 +31,7 @@ public class Rocket : AbstractExplodable
     [SerializeField]
     private Light2D rocketLightSource;
 
-    [Tooltip("Area effector of rocket in active state(pushed objects away from rocket base)")]
+    [Tooltip("Area effector of rocket in active state (pushes objects away from rocket base)")]
     [SerializeField]
     private AreaEffector2D rocketAreaEffector;
 

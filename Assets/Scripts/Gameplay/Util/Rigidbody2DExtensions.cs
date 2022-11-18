@@ -43,7 +43,8 @@ public static class Rigidbody2DExtensions
         rigidbody2D.AddForceAtPosition(force, forcePosition, mode);
     }
 
-    private static Vector2 CalculateForce(Vector2 closestPoint, Vector2 explosionPosition, float explosionRadius, float explosionForce, Vector2 upwardsExplosionPosition, Vector2 forcePosition, bool isOverlappingExplosion) {
+    private static Vector2 CalculateForce(Vector2 closestPoint, Vector2 explosionPosition, float explosionRadius, float explosionForce, Vector2 upwardsExplosionPosition, Vector2 forcePosition, bool isOverlappingExplosion)
+    {
         float forceDistanceWearoff = CalculateExplosionForceWearoff(closestPoint, explosionPosition, explosionRadius);
 
         Vector2 forceDirection = CalculateForceDirection(forcePosition, upwardsExplosionPosition, isOverlappingExplosion);
