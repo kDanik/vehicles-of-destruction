@@ -126,12 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0df4cba9c73146b6b619215bc0d8add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllowTopJoint: 0
-  AllowLeftJoint: 0
-  AllowRightJoint: 0
-  AllowBottomJoint: 0
-  JointBreakForce: 600
-  JointBreakTorque: 1000
+  AllowTopJoint: 1
+  AllowLeftJoint: 1
+  AllowRightJoint: 1
+  AllowBottomJoint: 1
+  JointBreakForce: 1000
+  JointBreakTorque: 600
   BlockTypeName: TNT
   BlockUISprite: {fileID: 2035100819, guid: d0ac10fb28ed64761a079a8181e21753, type: 3}
 --- !u!114 &8777941957805115450
