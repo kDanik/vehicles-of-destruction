@@ -22,21 +22,47 @@ public class EditorProcessor : MonoBehaviour
             {
                 if (placedBlocksGrid[x, y] == null) continue;
 
-                GameObject block = placedBlocksGrid[x, y];
-                block.transform.parent = vehicleParent.transform;
-
-                SetupRigidbody(block);
-
-                if (x != editorGrid.GetGridWidth() - 1 && IsJointInRightDirectionAllowed(block, placedBlocksGrid[x + 1, y]))
-                {
-                    CreateJoint(block, placedBlocksGrid[x + 1, y]);
-                }
-                if (y != editorGrid.GetGridHeight() - 1 && IsJointInTopDirectionAllowed(block, placedBlocksGrid[x, y + 1]))
-                {
-                    CreateJoint(block, placedBlocksGrid[x, y + 1]);
-                }
+                SetupVehicleBlock(x, y, placedBlocksGrid, editorGrid, vehicleParent);
             }
         }
+    }
+
+    private void SetupVehicleBlock(int x, int y, GameObject[,] placedBlocksGrid, EditorGrid editorGrid, GameObject vehicleParent)
+    {
+        GameObject block = placedBlocksGrid[x, y];
+        block.transform.parent = vehicleParent.transform;
+
+        SetupBlockRigidbodies(block);
+
+        if (x != editorGrid.GetGridWidth() - 1 && IsJointInRightDirectionAllowed(block, placedBlocksGrid[x + 1, y]))
+        {
+            CreateJoint(block, placedBlocksGrid[x + 1, y]);
+        }
+        if (y != editorGrid.GetGridHeight() - 1 && IsJointInTopDirectionAllowed(block, placedBlocksGrid[x, y + 1]))
+        {
+            CreateJoint(block, placedBlocksGrid[x, y + 1]);
+        }
+
+    }
+
+    private void SetupBlockRigidbodies(GameObject block)
+    {
+        SetupRigidbody(block);
+
+        // activate also for child objects for more complex blocks
+
+        foreach (Transform child in block.transform)
+        {
+            SetupRigidbody(child.gameObject);
+        }
+
+    }
+
+    private void SetupRigidbody(GameObject block)
+    {
+        Rigidbody2D rigidbody2D = block.GetComponent<Rigidbody2D>();
+
+        if (rigidbody2D != null) rigidbody2D.simulated = true;
     }
 
     /// <summary>
@@ -62,24 +88,6 @@ public class EditorProcessor : MonoBehaviour
         return copy;
     }
 
-    private void SetupRigidbody(GameObject block)
-    {
-        block.GetComponent<Rigidbody2D>().simulated = true;
-
-        // activate also for child objects for more complex blocks
-        if (block.transform.childCount != 0)
-        {
-
-            foreach (Transform child in block.transform)
-            {
-                Rigidbody2D childRigidbody2D = child.gameObject.GetComponent<Rigidbody2D>();
-
-                if (childRigidbody2D != null) childRigidbody2D.simulated = true;
-            }
-        }
-
-    }
-
     /// <summary>
     /// Creates and configures joint between block1 and block2
     /// </summary>
@@ -97,16 +105,15 @@ public class EditorProcessor : MonoBehaviour
 
     /// <summary>
     /// Calculates and set joint torque and force break strength.
-    /// The strength for joint will be taken from the block with lowest strength of two.
+    /// The strength for joint will be average of joint strength of both blocks.
     /// </summary>
     private void SetJointStrength(Joint2D joint, GameObject block1, GameObject block2)
     {
         Block blockScript1 = block1.GetComponent<Block>();
         Block blockScript2 = block2.GetComponent<Block>();
 
-        // use minimum joint break force / torque from 2 blocks. (TODO Maybe average strength would be more logical in future)
-        joint.breakForce = blockScript1.JointBreakForce > blockScript2.JointBreakForce ? blockScript2.JointBreakForce : blockScript1.JointBreakForce;
-        joint.breakTorque = blockScript1.JointBreakTorque > blockScript2.JointBreakTorque ? blockScript2.JointBreakTorque : blockScript1.JointBreakTorque;
+        joint.breakForce = (blockScript1.JointBreakForce + blockScript2.JointBreakForce) / 2;
+        joint.breakTorque = (blockScript1.JointBreakTorque + blockScript2.JointBreakTorque) / 2;
     }
 
     /// <summary>
