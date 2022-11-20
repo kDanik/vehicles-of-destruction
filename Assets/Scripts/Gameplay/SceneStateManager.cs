@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 /// <summary>
@@ -12,17 +13,26 @@ public class SceneStateManager : MonoBehaviour
     [Tooltip("All dynamic scene objects should be child objects of this dynamic object!")]
     private GameObject dynamicObjects;
 
+    [SerializeField]
+    [Tooltip("Cinemachine camera for this scene")]
+    private CinemachineVirtualCamera virtualCamera;
+
     private GameObject dynamicObjectsBuffer;
 
     private VehicleEditor editor;
 
+    private CameraController cameraController;
+
     public void Start()
     {
+        sceneState = SceneState.EDITOR;
+
         editor = gameObject.GetComponent<VehicleEditor>();
         dynamicObjectsBuffer = Instantiate(dynamicObjects);
         dynamicObjectsBuffer.SetActive(false);
 
-        sceneState = SceneState.EDITOR;
+        cameraController = gameObject.AddComponent<CameraController>();
+        cameraController.Initialize(virtualCamera);
     }
 
     /// <summary>
@@ -35,6 +45,7 @@ public class SceneStateManager : MonoBehaviour
         ReloadDynamicObjects();
         DestroyVehicle();
         editor.ActivateEditor();
+        cameraController.SwitchCameraToEditorMode();
     }
 
     /// <summary>
@@ -46,6 +57,7 @@ public class SceneStateManager : MonoBehaviour
 
         editor.ProcessEditorGrid();
         editor.DeactivateEditor();
+        cameraController.SwitchCameraToPlayMode(GameObject.Find("VehicleParent"));
     }
 
     /// <summary>
@@ -72,11 +84,19 @@ public class SceneStateManager : MonoBehaviour
         Destroy(GameObject.Find("VehicleParent"));
     }
 
+    /// <summary>
+    /// Check if current game/scene state is editor mode
+    /// </summary>
+    /// <returns>true if in editor mode, otherwise false</returns>
     public static bool IsEditorMode()
     {
         return sceneState == SceneState.EDITOR;
     }
 
+    /// <summary>
+    /// Check if current game/scene state is playmode mode
+    /// </summary>
+    /// <returns>true if in playmode mode, otherwise false</returns>
     public static bool IsPlaymode()
     {
         return sceneState == SceneState.PLAYMODE;
