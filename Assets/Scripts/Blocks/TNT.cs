@@ -5,6 +5,9 @@ public class TNT : AbstractExplodable
     [SerializeField]
     private float forceToExplode;
 
+    [SerializeField]
+    private GameObject explosionPrefab;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         float totalImpulse = CollisionImpulseCalculator.CalculateTotalImpulse(collision);
@@ -14,7 +17,7 @@ public class TNT : AbstractExplodable
 
     protected override void ExplodeImplementation(float explosionForce, float explosionRadius, float explosionUpwardModifier)
     {
-        // TODO maybe collision direction (of other object relative to this one) could be used for fancier physics
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
         ExplodeAllNearExploadables(explosionRadius / 2, 0.1f, 0.4f);
 
