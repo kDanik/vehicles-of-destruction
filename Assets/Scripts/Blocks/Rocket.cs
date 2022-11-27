@@ -8,6 +8,10 @@ public class Rocket : AbstractExplodable
     private float forceToExplode;
 
     [SerializeField]
+    [Tooltip("Object that will be created on explosion")]
+    private GameObject explosionPrefab;
+
+    [SerializeField]
     [Tooltip("Rocket speed / add force")]
     private int speed = 100;
 
@@ -130,6 +134,8 @@ public class Rocket : AbstractExplodable
     protected override void ExplodeImplementation(float explosionForce, float explosionRadius, float explosionUpwardModifier)
     {
         if (!hasFuel) return;
+
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
         ExplodeAllNearExploadables(explosionRadius / 2, 0.1f, 0.4f);
 

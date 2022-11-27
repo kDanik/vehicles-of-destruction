@@ -6,6 +6,7 @@ public class TNT : AbstractExplodable
     private float forceToExplode;
 
     [SerializeField]
+    [Tooltip("Object that will be created on explosion")]
     private GameObject explosionPrefab;
 
     void OnCollisionEnter2D(Collision2D collision)
