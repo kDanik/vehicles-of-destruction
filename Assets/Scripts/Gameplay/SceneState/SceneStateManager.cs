@@ -17,6 +17,20 @@ public class SceneStateManager : MonoBehaviour
     [Tooltip("Cinemachine camera for this scene")]
     private CinemachineVirtualCamera virtualCamera;
 
+    [SerializeField]
+    [Tooltip("UI elements that are specific for playmode state")]
+    private GameObject[] playmodeUIElements;
+
+    [SerializeField]
+    [Tooltip("UI elements that are specific for editor state")]
+    private GameObject[] editorUIElements;
+
+    [SerializeField]
+    [Tooltip("UI elements that are specific for level completed state")]
+    private GameObject[] levelCompletedUIElements;
+
+    private SceneStateUI sceneStateUI;
+
     private GameObject dynamicObjectsBuffer;
 
     private VehicleEditor editor;
@@ -33,6 +47,8 @@ public class SceneStateManager : MonoBehaviour
 
         cameraController = gameObject.AddComponent<CameraController>();
         cameraController.Initialize(virtualCamera);
+
+        sceneStateUI = new SceneStateUI(editorUIElements, levelCompletedUIElements, playmodeUIElements);
     }
 
     /// <summary>
@@ -46,6 +62,9 @@ public class SceneStateManager : MonoBehaviour
         DestroyVehicle();
         editor.ActivateEditor();
         cameraController.SwitchCameraToEditorMode();
+
+
+        sceneStateUI.ActivateEditorStateUI();
     }
 
     /// <summary>
@@ -55,10 +74,27 @@ public class SceneStateManager : MonoBehaviour
     {
         sceneState = SceneState.PLAYMODE;
 
+        ReloadDynamicObjects();
         editor.ProcessEditorGrid();
         editor.DeactivateEditor();
         cameraController.SwitchCameraToPlayMode(GameObject.Find("VehicleParent"));
+
+        sceneStateUI.DeactivateEditorStateUI();
     }
+
+    /// <summary>
+    /// Switches game state (UI, scene objects) to level completed mode (on level completion).
+    /// </summary>
+    public void SwitchToLevelCompletedMode()
+    {
+        sceneState = SceneState.LEVEL_COMPLETED;
+        Debug.Log("level completed");
+
+        sceneStateUI.DeactivateEditorStateUI();
+        sceneStateUI.DeactivatePlaymodeStateUI();
+        sceneStateUI.ActivateLevelCompletedStateUI();
+    }
+
 
     /// <summary>
     /// Deletes current dynamicObjects GameObjects and replaces it with dynamicObjectsBuffer
