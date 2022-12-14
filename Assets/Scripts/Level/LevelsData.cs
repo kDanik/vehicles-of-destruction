@@ -10,15 +10,13 @@ public class LevelsData : ScriptableObject
 
 
     /// <summary>
-    /// Finds and returns Level by provided level id. If none found return empty Level struct
+    /// Finds and returns Level by provided level index. If none found return empty Level struct
     /// </summary>
-    public Level FindLevelByLevelId(int levelId)
+    public Level FindLevelByLevelIndex(int levelIndex)
     {
-        foreach (Level level in levels) {
-            if (level.LevelId == levelId) return level;
-        }
-    
-        return Level.GetEmptyLevelStruct();
+        if (levelIndex < 0 || levelIndex >= levels.Length) return Level.GetEmptyLevelStruct();
+
+        return levels[levelIndex];
     }
 
     /// <summary>

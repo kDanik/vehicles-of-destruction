@@ -8,36 +8,36 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private LevelsData levelsData;
     private LevelLoader levelLoader;
 
-    private static int currentlySelectedLevelId = UNSELECTED_LEVEL_ID;
-    private static readonly int UNSELECTED_LEVEL_ID = -1;
+    private static int currentlySelectedLevelIndex = UNSELECTED_LEVEL_INDEX;
+    private static readonly int UNSELECTED_LEVEL_INDEX = -1;
 
 
     private void Awake()
     {
-        levelLoader = new LevelLoader(levelsData);   
+        levelLoader = new LevelLoader(levelsData);
     }
 
 
-    public void LoadLevelScene(int levelId)
+    public void LoadLevelScene(int levelIndex)
     {
-        currentlySelectedLevelId = levelId;
-        levelLoader.LoadLevelById(levelId);
+        currentlySelectedLevelIndex = levelIndex;
+        levelLoader.LoadLevelByIndex(levelIndex);
     }
 
     public void LoadMainMenuScene()
     {
-        currentlySelectedLevelId = UNSELECTED_LEVEL_ID;
+        currentlySelectedLevelIndex = UNSELECTED_LEVEL_INDEX;
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
 
     public static int GetSelectedLevelId()
     {
-        return currentlySelectedLevelId;
+        return currentlySelectedLevelIndex;
     }
 
     public static bool IsAnyLevelSelected()
     {
-        return UNSELECTED_LEVEL_ID != currentlySelectedLevelId;
+        return UNSELECTED_LEVEL_INDEX != currentlySelectedLevelIndex;
     }
 }

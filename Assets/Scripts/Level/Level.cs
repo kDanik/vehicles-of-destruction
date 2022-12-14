@@ -4,7 +4,6 @@
 [System.Serializable]
 public struct Level
 {
-    public int LevelId;
     public string SceneName;
     public bool isEmpty;
 
