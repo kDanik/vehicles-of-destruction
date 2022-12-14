@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles level completion logic (tracking of completed levels and scene state)
+/// </summary>
 public class LevelCompletion : MonoBehaviour
 {
     private SceneStateManager sceneStateManager;
@@ -11,7 +14,7 @@ public class LevelCompletion : MonoBehaviour
 
     public void CompleteCurrentLevel()
     {
-        LevelCompletionApi.MarkLevelAsCompleted(SceneLoader.GetSelectedLevelId());
+        LevelCompletionApi.MarkLevelAsCompleted(SceneLoader.GetSelectedLevelIndex());
 
         sceneStateManager.SwitchToLevelCompletedMode();
     }

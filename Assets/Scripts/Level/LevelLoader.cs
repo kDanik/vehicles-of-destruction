@@ -26,7 +26,7 @@ public class LevelLoader
         }
         else
         {
-            Debug.LogError("Level with given index can't be loaded! " + levelIndex);
+            Debug.LogError("Level with given index can't be loaded! index: s" + levelIndex);
         }
     }
 }

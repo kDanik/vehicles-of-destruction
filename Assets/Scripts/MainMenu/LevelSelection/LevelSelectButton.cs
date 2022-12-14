@@ -12,6 +12,7 @@ public class LevelSelectButton : MonoBehaviour
     [SerializeField] private Sprite lockedLevelIcon;
     [SerializeField] private TMP_Text buttonText;
 
+    [Tooltip("Index of corresponding Level from LevelsData")]
     [SerializeField] private int levelIndex;
 
     void Awake()
@@ -39,7 +40,7 @@ public class LevelSelectButton : MonoBehaviour
         SceneLoader sceneLoader = GameObject.Find("SceneManager").GetComponent<SceneLoader>();
         GetComponent<Button>().onClick.AddListener(() => sceneLoader.LoadLevelScene(levelIndex));
     }
-   
+
     private void SetupButtonAppearance(bool isCompleted, bool isUnlocked)
     {
         if (isCompleted && isUnlocked)
@@ -49,7 +50,7 @@ public class LevelSelectButton : MonoBehaviour
         }
         else if (!isCompleted && isUnlocked)
         {
-            SetupNormalLevelAppear();
+            SetupNormalLevelAppearance();
         }
         else
         {
@@ -63,7 +64,7 @@ public class LevelSelectButton : MonoBehaviour
         AddLevelNumberText();
     }
 
-    private void SetupNormalLevelAppear()
+    private void SetupNormalLevelAppearance()
     {
         GetComponent<Image>().sprite = normalLevelIcon;
         AddLevelNumberText();

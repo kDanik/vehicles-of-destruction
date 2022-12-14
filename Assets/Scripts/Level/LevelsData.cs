@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelsData", menuName = "ScriptableObjects/LevelsData", order = 1)]
 public class LevelsData : ScriptableObject
 {
+    [Tooltip("Array that stores all levels and their corresponding scenes. Order of items does matter and will affect text, progression tracking and etc")]
     [SerializeField] private Level[] levels;
 
 
