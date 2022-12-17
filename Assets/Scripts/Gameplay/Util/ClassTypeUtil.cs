@@ -2,27 +2,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Utility method connected with class type with unity script components
+/// Utility class that helps with detecting class of type / interface of scripts on Unity GameObjects
 /// </summary>
 public static class ClassTypeUtil
 {
     /// <summary>
-    /// Gets list of scipts on GameObject that inherit given class or interface type.
-    /// This only should be used to find scipts that inherit or implements some particular class or interface.
+    /// Gets list of scipts on GameObject that inherit given class or implement interface type.
+    /// This should be used to find scipts on GameObject that inherit or implements some particular class or interface.
     /// Use GetComponent for other cases.
     /// </summary>
-    /// <typeparam name="T">Class or interface type that should be looked for (inlcuding inherited or implemented classes)</typeparam>
-    /// <param name="gameObject">Object where scripts should be looked up</param>
-    /// <returns>list of scipts all matching, or empty list if none found</returns>
+    /// <typeparam name="T">Class or interface type that should be looked for and type of list that will be returned</typeparam>
+    /// <param name="gameObject">GameObject where scripts should be searched</param>
+    /// <returns>List of all matching scripts, or empty list if none found</returns>
     public static List<T> GetScriptWithClassTypeFromGameobject<T>(GameObject gameObject)
     {
-        List<T> interfaces = new();
+        List<T> classesOrInterfaces = new();
 
         foreach (MonoBehaviour script in gameObject.GetComponents<MonoBehaviour>())
         {
-            if (script is T interfaceType) interfaces.Add(interfaceType);
+            if (script is T classOrInterface) classesOrInterfaces.Add(classOrInterface);
         }
 
-        return interfaces;
+        return classesOrInterfaces;
     }
 }
