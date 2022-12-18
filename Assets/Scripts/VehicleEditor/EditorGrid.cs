@@ -22,6 +22,12 @@ public class EditorGrid : MonoBehaviour
         PopulateEditorGridWithCells();
     }
 
+
+    public void AddControlBlock(Vector2Int position, GameObject controlBlockPrefab)
+    {
+        AddNewBlock(position.x, position.y, controlBlockPrefab, false);
+    }
+
     /// <summary>
     /// Deletes block at given editor grid position, removing it from the scene
     /// </summary>
@@ -124,17 +130,15 @@ public class EditorGrid : MonoBehaviour
     }
 
     /// <summary>
-    /// Instantiates and adds to grid new block
+    /// Instantiates and adds to grid new block (wrapped into block wrapper)
     /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="blockPrefab"></param>
+    /// <param name="notifyEditorBlockSelection">Optional parameter, that controls if block selection script should be notified / changed on block add</param>
     /// <returns>newly instantiated object or null if position is busy</returns>
-    public GameObject AddNewBlock(int x, int y, GameObject blockPrefab)
+    public GameObject AddNewBlock(int x, int y, GameObject blockPrefab, bool notifyEditorBlockSelection = true)
     {
         if (placedBlocksGrid[x, y] != null) return null;
 
-        editorBlockSelection.OnAddBlockToEditorGrid(blockPrefab);
+        if (notifyEditorBlockSelection) editorBlockSelection.OnAddBlockToEditorGrid(blockPrefab);
 
         Vector2 position = editorCellGrid[x, y].transform.position;
 

@@ -17,6 +17,15 @@ public class VehicleEditor : MonoBehaviour
     [Tooltip("Editor height in blocks")]
     private int editorHeight;
 
+
+    [SerializeField]
+    [Tooltip("Default position (in editor grid) of control block after editor grid creation")]
+    private Vector2Int controlBlockPosition;
+
+    [SerializeField]
+    [Tooltip("Prefab for gameobject of control block")]
+    private GameObject controlBlockPrefab;
+
     private bool isFocused = false;
     private Vector2Int focusPositionInGrid;
 
@@ -32,6 +41,7 @@ public class VehicleEditor : MonoBehaviour
         editorBlockSelection = GetComponent<EditorBlockSelection>();
 
         editorGrid.InitiliazeEditorGrid(new Vector2Int(editorWidth, editorHeight), editorCell, blockWrapper, editorBlockSelection);
+        editorGrid.AddControlBlock(controlBlockPosition, controlBlockPrefab);
     }
 
     public void EditorCellMouseDown(Vector2Int positionInEditorGrid)
@@ -60,6 +70,14 @@ public class VehicleEditor : MonoBehaviour
 
     public void OnDragOutsideOfGrid(Vector2Int positionInEditorGrid)
     {
+        if (editorGrid.GetBlockWithoutWrapper(positionInEditorGrid.x, positionInEditorGrid.y).CompareTag("ControlBlock"))
+        {
+            // if block is control block deletion shouldn't be allowed
+            editorGrid.GetBlock(positionInEditorGrid.x, positionInEditorGrid.y).GetComponent<EditorBlock>().DragFail();
+
+            return;
+        }
+
         editorGrid.DeleteBlock(positionInEditorGrid.x, positionInEditorGrid.y);
 
         if (focusPositionInGrid.Equals(positionInEditorGrid)) ResetFocus();

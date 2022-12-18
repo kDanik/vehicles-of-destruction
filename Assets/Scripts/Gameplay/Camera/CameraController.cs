@@ -31,19 +31,24 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
-    /// Switches camera focus to playmode = on vehicle, by creating target group from all blocks
+    /// Switches camera focus to playmode = on vehicle control block
     /// </summary>
-    /// <param name="vehicleParent">parent object of vehicle</param>
     public void SwitchCameraToPlayMode(GameObject vehicleParent)
     {
+
         editorPositionBuffer = cinemachineVirtualCamera.transform.position;
 
         targetGroup = cinemachineVirtualCamera.gameObject.AddComponent<CinemachineTargetGroup>();
 
         foreach (Transform child in vehicleParent.transform)
         {
-            targetGroup.AddMember(child, 1, 1);
-            targetObjects.Add(child);
+            if (child.CompareTag("ControlBlock"))
+            {
+                targetGroup.AddMember(child, 1, 1);
+                targetObjects.Add(child);
+
+                break;
+            }
         }
 
         cinemachineVirtualCamera.m_Lens.OrthographicSize = 9;

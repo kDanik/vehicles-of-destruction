@@ -227,6 +227,8 @@ MonoBehaviour:
   editorCell: {fileID: 5499740099701595544, guid: 9208672d47fc14be2a40ade6ad16216c, type: 3}
   editorWidth: 13
   editorHeight: 6
+  controlBlockPosition: {x: 6, y: 2}
+  controlBlockPrefab: {fileID: 5578433701552637132, guid: 9fa04046787eb4fc2b634d0e9033623d, type: 3}
 --- !u!4 &78772571
 Transform:
   m_ObjectHideFlags: 0
@@ -692,7 +694,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &713930871
 MonoBehaviour:
@@ -715,7 +717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713930869}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 99.116, y: -52.924896, z: 5.689547}
+  m_LocalPosition: {x: -49.14, y: -38.05, z: 5.689547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
