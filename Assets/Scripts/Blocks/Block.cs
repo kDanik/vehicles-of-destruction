@@ -1,8 +1,7 @@
 using UnityEngine;
 
 /// <summary>  
-/// Manages configuration of block type.
-/// Should be attached to prefab of each block.
+/// Default script that manages configuration of each vehicle block.
 /// </summary>
 public class Block : MonoBehaviour
 {
@@ -15,12 +14,12 @@ public class Block : MonoBehaviour
     [Tooltip("Can block be attached to the bottom of this block")]
     public bool AllowBottomJoint;
 
-    [Tooltip("Maximum force that connected to this block joints can have. Check EditorProcessor.cs and Joints documentation")]
+    [Tooltip("Maximum force that can be applied to this blocks joints. Check EditorProcessor.cs and Joints documentation")]
     public int JointBreakForce = 600;
-    [Tooltip("Maximum torque that connected to this block joints can have. Check EditorProcessor.cs and Joints documentation")]
+    [Tooltip("Maximum torque that can be applied to this blocks joints. Check EditorProcessor.cs and Joints documentation")]
     public int JointBreakTorque = 600;
 
-    [Tooltip("Block type name used to detect which type of block prefab is block object, should ALWAYS be set and be unique.")]
+    [Tooltip("Block type name used by block selection to manage block count, should ALWAYS be set and be unique.")]
     public string BlockTypeName;
 
     [Tooltip("Sprite that is used to draw UI components related to this block. For multiple sprite blocks use one sprite that combines all sprites")]
