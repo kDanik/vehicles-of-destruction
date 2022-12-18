@@ -5,14 +5,20 @@ using UnityEngine;
 /// </summary>
 public class Block : MonoBehaviour
 {
+    [SerializeField]
     [Tooltip("Can block be attached to the top of this block")]
-    public bool AllowTopJoint;
+    private bool allowTopJoint;
+    [SerializeField]
     [Tooltip("Can block be attached to the left side of this block")]
-    public bool AllowLeftJoint;
+    private bool allowLeftJoint;
+
+    [SerializeField]
     [Tooltip("Can block be attached to the right side of this block")]
-    public bool AllowRightJoint;
+    private bool allowRightJoint;
+
+    [SerializeField]
     [Tooltip("Can block be attached to the bottom of this block")]
-    public bool AllowBottomJoint;
+    private bool allowBottomJoint;
 
     [Tooltip("Maximum force that can be applied to this blocks joints. Check EditorProcessor.cs and Joints documentation")]
     public int JointBreakForce = 600;
@@ -25,6 +31,9 @@ public class Block : MonoBehaviour
     [Tooltip("Sprite that is used to draw UI components related to this block. For multiple sprite blocks use one sprite that combines all sprites")]
     public Sprite BlockUISprite;
 
+    [SerializeField, HideInInspector]
+    private int rotation = 0;
+
     /// <summary>
     /// Rotates block by 90 degrees to the left direction and updates its allowed joints configuration
     /// </summary>
@@ -32,22 +41,100 @@ public class Block : MonoBehaviour
     {
         transform.Rotate(0, 0, 90);
 
-        RotateAllowedJoints();
+        // rotation variable is used to handle allowed joint configuration
+        if (rotation + 90 == 360)
+        {
+            rotation = 0;
+        }
+        else
+        {
+            rotation += 90;
+        }
+    }
+
+
+    /// <summary>
+    /// Checks if this block allows joint from the left side (counting current rotation)
+    /// </summary>
+    public bool IsLeftJointAllowed()
+    {
+        if (rotation == 90)
+        {
+            return allowTopJoint;
+        }
+        else if (rotation == 180)
+        {
+            return allowRightJoint;
+        }
+        else if (rotation == 270)
+        {
+            return allowBottomJoint;
+        }
+
+        return allowLeftJoint;
     }
 
     /// <summary>
-    /// Rotates allowed joints so their global direction stays the same.
+    /// Checks if this block allows joint from the right side (counting current rotation)
     /// </summary>
-    private void RotateAllowedJoints()
+    public bool IsRightJointAllowed()
     {
-        bool newAllowTopJoint = AllowRightJoint;
-        bool newAllowRightJoint = AllowBottomJoint;
-        bool newAllowBottomJoint = AllowLeftJoint;
-        bool newAllowLeftJoint = AllowTopJoint;
+        if (rotation == 90)
+        {
+            return allowBottomJoint;
+        }
+        else if (rotation == 180)
+        {
+            return allowLeftJoint;
+        }
+        else if (rotation == 270)
+        {
+            return allowTopJoint;
+        }
 
-        AllowTopJoint = newAllowTopJoint;
-        AllowBottomJoint = newAllowBottomJoint;
-        AllowLeftJoint = newAllowLeftJoint;
-        AllowRightJoint = newAllowRightJoint;
+        return allowRightJoint;
     }
+
+    /// <summary>
+    /// Checks if this block allows joint from the top side (counting current rotation)
+    /// </summary>
+    public bool IsTopJointAllowed()
+    {
+        if (rotation == 90)
+        {
+            return allowRightJoint;
+        }
+        else if (rotation == 180)
+        {
+            return allowBottomJoint;
+        }
+        else if (rotation == 270)
+        {
+            return allowLeftJoint;
+        }
+
+        return allowTopJoint;
+    }
+
+    /// <summary>
+    /// Checks if this block allows joint from the bottom side (counting current rotation)
+    /// </summary>
+    public bool IsBottomJointAllowed()
+    {
+        if (rotation == 90)
+        {
+            return allowLeftJoint;
+        }
+        else if (rotation == 180)
+        {
+            return allowTopJoint;
+        }
+        else if (rotation == 270)
+        {
+            return allowRightJoint;
+        }
+
+        return allowBottomJoint;
+    }
+
 }

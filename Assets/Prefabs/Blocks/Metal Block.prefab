@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0df4cba9c73146b6b619215bc0d8add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllowTopJoint: 1
-  AllowLeftJoint: 1
-  AllowRightJoint: 1
-  AllowBottomJoint: 1
+  allowTopJoint: 1
+  allowLeftJoint: 1
+  allowRightJoint: 1
+  allowBottomJoint: 1
   JointBreakForce: 2000
   JointBreakTorque: 1200
   BlockTypeName: Metal Block

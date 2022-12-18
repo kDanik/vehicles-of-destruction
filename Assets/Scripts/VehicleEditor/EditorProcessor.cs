@@ -127,7 +127,7 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        return block1.GetComponent<Block>().AllowTopJoint && block2.GetComponent<Block>().AllowBottomJoint;
+        return block1.GetComponent<Block>().IsTopJointAllowed() && block2.GetComponent<Block>().IsBottomJointAllowed();
     }
 
     /// <summary>
@@ -141,6 +141,12 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        return block1.GetComponent<Block>().AllowRightJoint && block2.GetComponent<Block>().AllowLeftJoint;
+        Debug.Log(block1.GetComponent<Block>().BlockTypeName);
+        Debug.Log(block1.GetComponent<Block>().IsRightJointAllowed());
+        Debug.Log(block2.GetComponent<Block>().BlockTypeName);
+        Debug.Log(block2.GetComponent<Block>().IsLeftJointAllowed());
+  
+
+        return block1.GetComponent<Block>().IsRightJointAllowed() && block2.GetComponent<Block>().IsLeftJointAllowed();
     }
 }

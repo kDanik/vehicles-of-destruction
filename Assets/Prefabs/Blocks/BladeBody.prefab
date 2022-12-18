@@ -342,10 +342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0df4cba9c73146b6b619215bc0d8add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllowTopJoint: 0
-  AllowLeftJoint: 0
-  AllowRightJoint: 0
-  AllowBottomJoint: 1
+  allowTopJoint: 0
+  allowLeftJoint: 0
+  allowRightJoint: 0
+  allowBottomJoint: 1
   JointBreakForce: 1200
   JointBreakTorque: 600
   BlockTypeName: Sawblade
