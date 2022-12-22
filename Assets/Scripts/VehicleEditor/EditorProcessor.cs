@@ -20,9 +20,10 @@ public class EditorProcessor : MonoBehaviour
         {
             for (int x = 0; x < editorGrid.GetGridWidth(); x++)
             {
-                if (placedBlocksGrid[x, y] == null) continue;
-
-                SetupVehicleBlock(x, y, placedBlocksGrid, editorGrid, vehicleParent);
+                if (placedBlocksGrid[x, y] != null)
+                {
+                    SetupVehicleBlock(x, y, placedBlocksGrid, editorGrid, vehicleParent);
+                }
             }
         }
     }
@@ -36,11 +37,11 @@ public class EditorProcessor : MonoBehaviour
 
         if (x != editorGrid.GetGridWidth() - 1 && IsJointInRightDirectionAllowed(block, placedBlocksGrid[x + 1, y]))
         {
-            CreateJoint(block, placedBlocksGrid[x + 1, y]);
+            CreateJoint(block, placedBlocksGrid[x + 1, y], Direction.RIGHT);
         }
         if (y != editorGrid.GetGridHeight() - 1 && IsJointInTopDirectionAllowed(block, placedBlocksGrid[x, y + 1]))
         {
-            CreateJoint(block, placedBlocksGrid[x, y + 1]);
+            CreateJoint(block, placedBlocksGrid[x, y + 1], Direction.TOP);
         }
 
     }
@@ -91,27 +92,28 @@ public class EditorProcessor : MonoBehaviour
     /// <summary>
     /// Creates and configures joint between block1 and block2
     /// </summary>
-    /// <param name="block1"></param>
-    /// <param name="block2"></param>
-    private void CreateJoint(GameObject block1, GameObject block2)
+    private void CreateJoint(GameObject block1, GameObject block2, Direction direction)
     {
-        FixedJoint2D joint = block1.AddComponent<FixedJoint2D>();
+        Block blockScript1 = block1.GetComponent<Block>();
+        Block blockScript2 = block2.GetComponent<Block>();
 
-        joint.connectedBody = block2.GetComponent<Rigidbody2D>();
+        GameObject gameObjectContainingJoint = blockScript1.GetGameobjectForJointCreation(direction);
+        GameObject gameObjectJointedTo = blockScript2.GetGameobjectForJointCreation(DirectionUtil.GetOpositeDirection(direction));
+
+        FixedJoint2D joint = gameObjectContainingJoint.AddComponent<FixedJoint2D>();
+
+        joint.connectedBody = gameObjectJointedTo.GetComponent<Rigidbody2D>();
         joint.enableCollision = true;
 
-        SetJointStrength(joint, block1, block2);
+        SetJointStrength(joint, blockScript1, blockScript2);
     }
 
     /// <summary>
     /// Calculates and set joint torque and force break strength.
     /// The strength for joint will be average of joint strength of both blocks.
     /// </summary>
-    private void SetJointStrength(Joint2D joint, GameObject block1, GameObject block2)
+    private void SetJointStrength(Joint2D joint, Block blockScript1, Block blockScript2)
     {
-        Block blockScript1 = block1.GetComponent<Block>();
-        Block blockScript2 = block2.GetComponent<Block>();
-
         joint.breakForce = (blockScript1.JointBreakForce + blockScript2.JointBreakForce) / 2;
         joint.breakTorque = (blockScript1.JointBreakTorque + blockScript2.JointBreakTorque) / 2;
     }
@@ -127,7 +129,7 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        return block1.GetComponent<Block>().IsTopJointAllowed() && block2.GetComponent<Block>().IsBottomJointAllowed();
+        return block1.GetComponent<Block>().IsJointAllowed(Direction.TOP) && block2.GetComponent<Block>().IsJointAllowed(Direction.BOTTOM);
     }
 
     /// <summary>
@@ -141,12 +143,6 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        Debug.Log(block1.GetComponent<Block>().BlockTypeName);
-        Debug.Log(block1.GetComponent<Block>().IsRightJointAllowed());
-        Debug.Log(block2.GetComponent<Block>().BlockTypeName);
-        Debug.Log(block2.GetComponent<Block>().IsLeftJointAllowed());
-  
-
-        return block1.GetComponent<Block>().IsRightJointAllowed() && block2.GetComponent<Block>().IsLeftJointAllowed();
+        return block1.GetComponent<Block>().IsJointAllowed(Direction.RIGHT) && block2.GetComponent<Block>().IsJointAllowed(Direction.LEFT);
     }
 }

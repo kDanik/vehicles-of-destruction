@@ -52,89 +52,75 @@ public class Block : MonoBehaviour
         }
     }
 
-
     /// <summary>
-    /// Checks if this block allows joint from the left side (counting current rotation)
+    /// Checks if joint is allowed (from configuration of block) for provided direction.
+    /// The rotation of this block will be considered.
     /// </summary>
-    public bool IsLeftJointAllowed()
-    {
-        if (rotation == 90)
+    public bool IsJointAllowed(Direction direction) {
+
+        Direction realDirection = DirectionUtil.CalculateDirectionAfterRotation(direction, rotation);
+
+        switch (realDirection)
         {
-            return allowTopJoint;
-        }
-        else if (rotation == 180)
-        {
-            return allowRightJoint;
-        }
-        else if (rotation == 270)
-        {
-            return allowBottomJoint;
+            case Direction.LEFT:
+                return allowLeftJoint;
+            case Direction.RIGHT:
+                return allowRightJoint;
+            case Direction.BOTTOM:
+                return allowBottomJoint;
+            case Direction.TOP:
+                return allowTopJoint;
+            default:
+                Debug.LogError("unknown direction enum");
+
+                break;
         }
 
-        return allowLeftJoint;
+        return false;
     }
 
     /// <summary>
-    /// Checks if this block allows joint from the right side (counting current rotation)
+    /// Returns gameobject with which (or from which) joint can be made for provided direction.
+    /// The rotation of this block will be considered.
     /// </summary>
-    public bool IsRightJointAllowed()
+    public GameObject GetGameobjectForJointCreation(Direction direction)
     {
-        if (rotation == 90)
+
+        Direction realDirection = DirectionUtil.CalculateDirectionAfterRotation(direction, rotation);
+
+        switch (realDirection)
         {
-            return allowBottomJoint;
-        }
-        else if (rotation == 180)
-        {
-            return allowLeftJoint;
-        }
-        else if (rotation == 270)
-        {
-            return allowTopJoint;
+            case Direction.LEFT:
+                return GetLeftJointGameobject();
+            case Direction.RIGHT:
+                return GetRightJointGameobject();
+            case Direction.BOTTOM:
+                return GetBottomJointGameobject();
+            case Direction.TOP:
+                return GetTopJointGameobject();
+            default:
+                Debug.LogError("unknown direction enum");
+
+                break;
         }
 
-        return allowRightJoint;
+        return null;
     }
 
-    /// <summary>
-    /// Checks if this block allows joint from the top side (counting current rotation)
-    /// </summary>
-    public bool IsTopJointAllowed()
+    protected virtual GameObject GetLeftJointGameobject()
     {
-        if (rotation == 90)
-        {
-            return allowRightJoint;
-        }
-        else if (rotation == 180)
-        {
-            return allowBottomJoint;
-        }
-        else if (rotation == 270)
-        {
-            return allowLeftJoint;
-        }
-
-        return allowTopJoint;
+        return gameObject;
     }
-
-    /// <summary>
-    /// Checks if this block allows joint from the bottom side (counting current rotation)
-    /// </summary>
-    public bool IsBottomJointAllowed()
+    protected virtual GameObject GetRightJointGameobject()
     {
-        if (rotation == 90)
-        {
-            return allowLeftJoint;
-        }
-        else if (rotation == 180)
-        {
-            return allowTopJoint;
-        }
-        else if (rotation == 270)
-        {
-            return allowRightJoint;
-        }
-
-        return allowBottomJoint;
+        return gameObject;
     }
-
+    protected virtual GameObject GetBottomJointGameobject()
+    {
+        return gameObject;
+    }
+    protected virtual GameObject GetTopJointGameobject()
+    {
+        return gameObject;
+    }
 }
