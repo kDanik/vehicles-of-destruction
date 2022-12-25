@@ -97,7 +97,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6412738775131923550}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9ce2d324182bd45b4945da1ec0a50780, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   JointBreakTorque: 600
   BlockTypeName: TNT
   BlockUISprite: {fileID: 2035100819, guid: d0ac10fb28ed64761a079a8181e21753, type: 3}
+  rotation: 0
 --- !u!114 &8777941957805115450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9ce2d324182bd45b4945da1ec0a50780, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0

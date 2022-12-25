@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4266397145661580}
   - component: {fileID: 9021648127336959441}
-  - component: {fileID: 4500986474943939985}
+  - component: {fileID: 1512214209943259931}
+  - component: {fileID: 1608348060968947870}
   m_Layer: 0
   m_Name: RocketTrailAreaEffector
   m_TagString: Untagged
@@ -48,13 +49,13 @@ AreaEffector2D:
     m_Bits: 4294967295
   m_UseGlobalAngle: 0
   m_ForceAngle: 0
-  m_ForceMagnitude: 300
-  m_ForceVariation: 75
+  m_ForceMagnitude: 150
+  m_ForceVariation: 35
   m_ForceTarget: 1
   m_Drag: 0
   m_AngularDrag: 0
---- !u!61 &4500986474943939985
-BoxCollider2D:
+--- !u!60 &1512214209943259931
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -76,9 +77,35 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 0.8}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.3387451, y: 0.6992874}
+      - {x: -0.9274054, y: 0.39445093}
+      - {x: -0.94164413, y: -0.36403263}
+      - {x: 1.339975, y: -0.5778272}
+      - {x: 1.4547958, y: -0.07955551}
+      - {x: 1.4482412, y: 0.28962702}
+--- !u!50 &1608348060968947870
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931209951754070285}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4965229658855763538
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +119,7 @@ GameObject:
   - component: {fileID: -8685540788336006175}
   - component: {fileID: 5699757389375963425}
   - component: {fileID: -8463130917269979275}
-  - component: {fileID: 2234681818149374236}
+  - component: {fileID: 3298161010016520347}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -190,6 +217,7 @@ MonoBehaviour:
   JointBreakTorque: 1200
   BlockTypeName: Rocket
   BlockUISprite: {fileID: 1756784860, guid: 21b620d013f284ef19ab9c7af964443a, type: 3}
+  rotation: 0
 --- !u!114 &5699757389375963425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,13 +258,13 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9c7fb34158913463e9b693baf3232bdf, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &2234681818149374236
-BoxCollider2D:
+--- !u!60 &3298161010016520347
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -244,11 +272,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 4965229658855763538}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9c7fb34158913463e9b693baf3232bdf, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11500001, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.65, y: 0.5}
@@ -258,9 +286,27 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.76666665, y: 0.925}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.09, y: -0.44750002}
+      - {x: 0.175, y: -0.45250002}
+      - {x: 0.20166667, y: -0.4375}
+      - {x: 0.23, y: -0.3541667}
+      - {x: 0.24666667, y: -0.27916667}
+      - {x: 0.25833333, y: -0.100833334}
+      - {x: 0.25833333, y: 0.079166666}
+      - {x: 0.245, y: 0.24916667}
+      - {x: 0.22833334, y: 0.36916667}
+      - {x: 0.19833334, y: 0.45916668}
+      - {x: 0.15833333, y: 0.4625}
+      - {x: 0.07666667, y: 0.43583333}
+      - {x: -0.36, y: 0.22916667}
+      - {x: -0.38833335, y: 0.3675}
+      - {x: -0.49833333, y: 0.42916667}
+      - {x: -0.49833333, y: -0.4625}
+      - {x: -0.38833335, y: -0.39083335}
+      - {x: -0.38333336, y: -0.35916668}
+      - {x: -0.27166668, y: -0.3025}
 --- !u!1 &7256202139795563366
 GameObject:
   m_ObjectHideFlags: 0

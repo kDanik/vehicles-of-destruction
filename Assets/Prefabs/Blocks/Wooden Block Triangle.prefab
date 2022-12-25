@@ -96,7 +96,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 4250765640128295589}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9ce2d324182bd45b4945da1ec0a50780, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9ce2d324182bd45b4945da1ec0a50780, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -156,3 +156,4 @@ MonoBehaviour:
   JointBreakTorque: 1000
   BlockTypeName: Wooden Block Triangle
   BlockUISprite: {fileID: 2012642607, guid: 7f7b700c965ca46f09c10a91edf48d7e, type: 3}
+  rotation: 0

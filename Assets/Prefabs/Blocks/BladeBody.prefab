@@ -95,7 +95,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1014606775527229355}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9c7fb34158913463e9b693baf3232bdf, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -165,7 +165,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9c7fb34158913463e9b693baf3232bdf, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -275,7 +275,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9ce2d324182bd45b4945da1ec0a50780, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -289,7 +289,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1014606775926654745}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9ce2d324182bd45b4945da1ec0a50780, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -350,3 +350,4 @@ MonoBehaviour:
   JointBreakTorque: 600
   BlockTypeName: Sawblade
   BlockUISprite: {fileID: 21300000, guid: edd13921ce8b8448f98297a98fdf2ffb, type: 3}
+  rotation: 0
