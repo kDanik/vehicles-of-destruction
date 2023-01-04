@@ -114,7 +114,7 @@ public class EditorBlockSelection : MonoBehaviour
 
     private void AddBlockToScrollBar(int index, EditorBlock editorBlock)
     {
-        Sprite blockUISprite = editorBlock.block.GetComponent<Block>().BlockUISprite;
+        Sprite blockUISprite = editorBlock.block.GetComponent<BlockConfiguration>().BlockUISprite;
 
         GameObject newScrollbarBlock = Instantiate(baseBlockUIPrefab, scrollBarContent.transform, false);
 
@@ -126,7 +126,7 @@ public class EditorBlockSelection : MonoBehaviour
 
     private bool IsOfSamePrefabType(GameObject block1, GameObject block2)
     {
-        return block1.GetComponent<Block>().BlockTypeName.Equals(block2.GetComponent<Block>().BlockTypeName);
+        return block1.GetComponent<BlockConfiguration>().BlockTypeName.Equals(block2.GetComponent<BlockConfiguration>().BlockTypeName);
     }
 
     private int FindIndexByPrefabType(GameObject block)

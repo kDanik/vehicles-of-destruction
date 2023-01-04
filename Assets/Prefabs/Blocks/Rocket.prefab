@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 9021648127336959441}
   - component: {fileID: 1512214209943259931}
   - component: {fileID: 1608348060968947870}
-  m_Layer: 0
+  - component: {fileID: 2468042465722123211}
+  m_Layer: 2
   m_Name: RocketTrailAreaEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931209951754070285}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.306, y: 0, z: 0}
+  m_LocalPosition: {x: 0.525, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +43,7 @@ AreaEffector2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931209951754070285}
-  m_Enabled: 1
+  m_Enabled: 0
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
@@ -65,9 +66,9 @@ PolygonCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.9, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -106,6 +107,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2468042465722123211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931209951754070285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b733cbd5f35a44159fbb214f8795f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4965229658855763538
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +255,7 @@ MonoBehaviour:
   rocketTrailParticleSystem: {fileID: 4873839507057945268}
   rocketLightSource: {fileID: 846657410951035007}
   rocketAreaEffector: {fileID: 9021648127336959441}
+  rocketAreaEffectorCollisionTracker: {fileID: 2468042465722123211}
 --- !u!50 &-8463130917269979275
 Rigidbody2D:
   serializedVersion: 4

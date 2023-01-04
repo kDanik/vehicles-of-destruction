@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Wheel : MonoBehaviour
+public class Wheel : MonoBehaviour, IPlaymodeStartListener
 {
     [SerializeField]
     [Tooltip("Wheel object(round thingy) of wheel base")]
@@ -13,5 +13,10 @@ public class Wheel : MonoBehaviour
             // when wheel joint breaks wheel should be removed from children of this wheel base
             wheel.transform.parent = transform.parent;
         }
+    }
+
+    void IPlaymodeStartListener.OnPlaymodeStart()
+    {
+        Debug.Log("hi");
     }
 }

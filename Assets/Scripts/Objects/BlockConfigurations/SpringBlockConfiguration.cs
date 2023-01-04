@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpringBlock : Block
+public class SpringBlockConfiguration : BlockConfiguration
 {
     [SerializeField]
     private GameObject leftJointGameObject;

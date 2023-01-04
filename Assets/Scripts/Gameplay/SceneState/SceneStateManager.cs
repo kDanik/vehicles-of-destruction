@@ -1,3 +1,4 @@
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class SceneStateManager : MonoBehaviour
     private CinemachineVirtualCamera virtualCamera;
 
     [SerializeField]
+    [Tooltip("Script for vehicle editor. (Also parent object of editor grid)")]
+    private VehicleEditor editor;
+
+    [SerializeField]
     [Tooltip("UI elements that are specific for playmode state")]
     private GameObject[] playmodeUIElements;
 
@@ -33,15 +38,12 @@ public class SceneStateManager : MonoBehaviour
 
     private GameObject dynamicObjectsBuffer;
 
-    private VehicleEditor editor;
-
     private CameraController cameraController;
 
     public void Start()
     {
         sceneState = SceneState.EDITOR;
 
-        editor = gameObject.GetComponent<VehicleEditor>();
         dynamicObjectsBuffer = Instantiate(dynamicObjects);
         dynamicObjectsBuffer.SetActive(false);
 
@@ -80,6 +82,16 @@ public class SceneStateManager : MonoBehaviour
         cameraController.SwitchCameraToPlayMode(GameObject.Find("VehicleParent"));
 
         sceneStateUI.DeactivateEditorStateUI();
+
+        StartCoroutine(BroadcastPlaymodeStartMessage());
+    }
+
+    private IEnumerator BroadcastPlaymodeStartMessage()
+    {
+        yield return new WaitForFixedUpdate();
+
+        dynamicObjects.BroadcastMessage("OnPlaymodeStart", SendMessageOptions.DontRequireReceiver);
+        GameObject.Find("VehicleParent").BroadcastMessage("OnPlaymodeStart", SendMessageOptions.DontRequireReceiver);
     }
 
     /// <summary>

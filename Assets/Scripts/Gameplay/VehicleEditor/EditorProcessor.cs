@@ -94,8 +94,8 @@ public class EditorProcessor : MonoBehaviour
     /// </summary>
     private void CreateJoint(GameObject block1, GameObject block2, Direction direction)
     {
-        Block blockScript1 = block1.GetComponent<Block>();
-        Block blockScript2 = block2.GetComponent<Block>();
+        BlockConfiguration blockScript1 = block1.GetComponent<BlockConfiguration>();
+        BlockConfiguration blockScript2 = block2.GetComponent<BlockConfiguration>();
 
         GameObject gameObjectContainingJoint = blockScript1.GetGameobjectForJointCreation(direction);
         GameObject gameObjectJointedTo = blockScript2.GetGameobjectForJointCreation(DirectionUtil.GetOpositeDirection(direction));
@@ -112,7 +112,7 @@ public class EditorProcessor : MonoBehaviour
     /// Calculates and set joint torque and force break strength.
     /// The strength for joint will be average of joint strength of both blocks.
     /// </summary>
-    private void SetJointStrength(Joint2D joint, Block blockScript1, Block blockScript2)
+    private void SetJointStrength(Joint2D joint, BlockConfiguration blockScript1, BlockConfiguration blockScript2)
     {
         joint.breakForce = (blockScript1.JointBreakForce + blockScript2.JointBreakForce) / 2;
         joint.breakTorque = (blockScript1.JointBreakTorque + blockScript2.JointBreakTorque) / 2;
@@ -129,7 +129,7 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        return block1.GetComponent<Block>().IsJointAllowed(Direction.TOP) && block2.GetComponent<Block>().IsJointAllowed(Direction.BOTTOM);
+        return block1.GetComponent<BlockConfiguration>().IsJointAllowed(Direction.TOP) && block2.GetComponent<BlockConfiguration>().IsJointAllowed(Direction.BOTTOM);
     }
 
     /// <summary>
@@ -143,6 +143,6 @@ public class EditorProcessor : MonoBehaviour
     {
         if (block1 == null || block2 == null) return false;
 
-        return block1.GetComponent<Block>().IsJointAllowed(Direction.RIGHT) && block2.GetComponent<Block>().IsJointAllowed(Direction.LEFT);
+        return block1.GetComponent<BlockConfiguration>().IsJointAllowed(Direction.RIGHT) && block2.GetComponent<BlockConfiguration>().IsJointAllowed(Direction.LEFT);
     }
 }

@@ -28,7 +28,7 @@ public class ControlBlock : MonoBehaviour
 
     private IEnumerator UpdateScreenText()
     {
-        int velocityUnitsPerMin= (int) Math.Round(rigidbodyBuffer.velocity.magnitude);
+        int velocityUnitsPerMin = (int)Math.Round(rigidbodyBuffer.velocity.magnitude);
         if (velocityUnitsPerMin > 99) velocityUnitsPerMin = 99;
 
         screenText.text = velocityUnitsPerMin + "";

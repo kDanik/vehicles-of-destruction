@@ -162,7 +162,7 @@ public class EditorGrid : MonoBehaviour
     {
         if (placedBlocksGrid[x, y] == null) return false;
 
-        GetBlockWithoutWrapper(x, y).GetComponent<Block>().Rotate();
+        GetBlockWithoutWrapper(x, y).GetComponent<BlockConfiguration>().Rotate();
 
         return true;
     }

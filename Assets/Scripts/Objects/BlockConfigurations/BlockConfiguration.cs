@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>  
 /// Default script that manages configuration of each vehicle block.
 /// </summary>
-public class Block : MonoBehaviour
+public class BlockConfiguration : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Can block be attached to the top of this block")]

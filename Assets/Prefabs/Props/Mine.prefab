@@ -282,13 +282,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4153036733511978307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1434cbffb434149a0e8b6d73b445f2, type: 3}
+  m_Script: {fileID: 11500000, guid: fd01fed7d40c44e58a7322a6b5e6df55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 900
-  explosionRadius: 2
-  explosionUpwardModifier: 0.4
+  explosionForce: 400
+  explosionRadius: 3
+  explosionUpwardModifier: 0.3
   explosionPrefab: {fileID: 8304229717940447805, guid: 357b1ed855bbf4bae9a1552a3e1d59aa, type: 3}
   mineLight: {fileID: 4767669210637104333}
   lightMinIntensity: 0
-  lightMaxIntensity: 0.5
+  lightMaxIntensity: 1

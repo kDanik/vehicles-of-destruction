@@ -35,9 +35,9 @@ public class Rocket : AbstractExplodable
     [SerializeField]
     private Light2D rocketLightSource;
 
-    [Tooltip("Area effector of rocket in active state (pushes objects away from rocket base)")]
+    [Tooltip("Collider tracker on area effector of rocket in active state (pushes objects away from rocket base)")]
     [SerializeField]
-    private AreaEffector2D rocketAreaEffector;
+    private CollisionTracker rocketAreaEffectorCollisionTracker;
 
     private bool hasFuel = true;
     private float currentDuration;
@@ -67,7 +67,8 @@ public class Rocket : AbstractExplodable
             currentDuration += Time.deltaTime;
 
             UpdateShaderColorIntensity();
-            rigidbodyBuffer.AddRelativeForce(GetRandomSpeedMultiplier() * speed * Vector2.left);
+
+            AddRocketForces();
 
             if (currentDuration >= durationSeconds)
             {
@@ -90,7 +91,7 @@ public class Rocket : AbstractExplodable
     {
         ActivateRocketVisuals();
 
-        rocketAreaEffector.gameObject.SetActive(true);
+        rocketAreaEffectorCollisionTracker.gameObject.SetActive(true);
     }
 
     private void ActivateRocketVisuals()
@@ -120,6 +121,36 @@ public class Rocket : AbstractExplodable
     private float GetRandomSpeedMultiplier()
     {
         return 1 + Random.Range(-randomSpeedVariation, randomSpeedVariation);
+    }
+
+    private void AddRocketForces()
+    {
+        float force = GetRandomSpeedMultiplier() * speed;
+
+        rigidbodyBuffer.AddRelativeForce(force * Vector2.left);
+        if (Random.Range(1, 4) == 1) AddRocketAreaEffectorForce(force);
+    }
+
+    /// <summary>
+    /// Area effector for this rocket. It check the collider list from collision tracker and adds force to object in it.
+    /// Only adds force to object, that are directly colliding by this trail (and not behind some other object).
+    /// </summary>
+    /// <param name="force">Force (without direction) that should be used by this area effector</param>
+    private void AddRocketAreaEffectorForce(float force)
+    {
+        foreach (Collider2D collider in rocketAreaEffectorCollisionTracker.GetColliders())
+        {
+            if (collider.gameObject.layer.Equals(Physics.IgnoreRaycastLayer)) return;
+
+            Vector3 direction = collider.gameObject.transform.position - rocketAreaEffectorCollisionTracker.transform.position;
+
+            RaycastHit2D hit = Physics2D.Raycast(rocketAreaEffectorCollisionTracker.transform.position, direction);
+
+            if (collider.Equals(hit.collider) && collider.attachedRigidbody != null)
+            {
+                collider.attachedRigidbody.AddForce(force * Random.Range(0.05f, 0.4f) * direction, ForceMode2D.Impulse);
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
