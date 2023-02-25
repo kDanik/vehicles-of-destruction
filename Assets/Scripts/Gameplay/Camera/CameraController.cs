@@ -2,6 +2,10 @@
 using Cinemachine;
 using UnityEngine;
 
+/// <summary>
+/// This class is used to allow camera folowing of vehicle as target group of blocks.
+/// As currently only one control block should be followed, this is absolute and can be changed.
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     private CinemachineVirtualCamera cinemachineVirtualCamera;

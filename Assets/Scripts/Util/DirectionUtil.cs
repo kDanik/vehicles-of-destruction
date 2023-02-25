@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Utility class to work with Direction class (mostly used for vehicle editor)
+/// </summary>
 public class DirectionUtil
 {
     /// <summary>
-    /// Calculates direction from initialDirection by applying provided rotation
+    /// Calculates direction from initialDirection by applying provided rotation(to the right)
     /// </summary>
-    /// <param name="initialDirection"></param>
     /// <param name="rotationInDegrees">See block implementation. Only accepts rotation with value 0, 90 , 180 and 270</param>
     public static Direction CalculateDirectionAfterRotation(Direction initialDirection, int rotationInDegrees)
     {
@@ -19,7 +21,7 @@ public class DirectionUtil
     }
 
     /// <summary>
-    /// Returns direction oposite from provided one (left --> right, top --> bottom)
+    /// Returns direction oposite from provided one (left --> right, top --> bottom, ...)
     /// </summary>
     public static Direction GetOpositeDirection(Direction direction)
     {
@@ -43,10 +45,7 @@ public class DirectionUtil
                 return Direction.RIGHT;
             default:
                 Debug.LogError("unknown direction enum provided for DirectionUtil");
-
-                break;
+                return Direction.UNDEFINED;
         }
-
-        return Direction.UNDEFINED;
     }
 }

@@ -22,6 +22,7 @@ public class BlockConfiguration : MonoBehaviour
 
     [Tooltip("Maximum force that can be applied to this blocks joints. Check EditorProcessor.cs and Joints documentation")]
     public int JointBreakForce = 600;
+
     [Tooltip("Maximum torque that can be applied to this blocks joints. Check EditorProcessor.cs and Joints documentation")]
     public int JointBreakTorque = 600;
 
@@ -56,7 +57,8 @@ public class BlockConfiguration : MonoBehaviour
     /// Checks if joint is allowed (from configuration of block) for provided direction.
     /// The rotation of this block will be considered.
     /// </summary>
-    public bool IsJointAllowed(Direction direction) {
+    public bool IsJointAllowed(Direction direction)
+    {
 
         Direction realDirection = DirectionUtil.CalculateDirectionAfterRotation(direction, rotation);
 
@@ -71,7 +73,7 @@ public class BlockConfiguration : MonoBehaviour
             case Direction.TOP:
                 return allowTopJoint;
             default:
-                Debug.LogError("unknown direction enum");
+                Debug.LogError("Invalid direction enum! " + realDirection);
 
                 break;
         }
@@ -99,7 +101,7 @@ public class BlockConfiguration : MonoBehaviour
             case Direction.TOP:
                 return GetTopJointGameobject();
             default:
-                Debug.LogError("unknown direction enum");
+                Debug.LogError("Invalid direction enum! " + realDirection);
 
                 break;
         }

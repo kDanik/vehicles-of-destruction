@@ -9,7 +9,7 @@ public class BlinkingText : MonoBehaviour
 {
     [Tooltip("Delay between activated and deactivated states")]
     [SerializeField]
-    private float delayBetweenBlinks = 0.5f ;
+    private float delayBetweenBlinks = 0.5f;
 
     [Tooltip("Text component that should blink")]
     [SerializeField]
@@ -22,7 +22,7 @@ public class BlinkingText : MonoBehaviour
 
     private IEnumerator TextBlink()
     {
-        while(true)
+        while (true)
         {
             text.enabled = !text.enabled;
 

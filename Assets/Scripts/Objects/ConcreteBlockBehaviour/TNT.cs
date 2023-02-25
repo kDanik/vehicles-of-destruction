@@ -3,6 +3,7 @@ using UnityEngine;
 public class TNT : AbstractExplodable
 {
     [SerializeField]
+    [Tooltip("Collision force from which this block will explode")]
     private float forceToExplode;
 
     [SerializeField]

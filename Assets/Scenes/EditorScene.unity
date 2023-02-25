@@ -257,19 +257,19 @@ MonoBehaviour:
   scrollBarContent: {fileID: 424557204}
   editorBlocks:
   - block: {fileID: 3167202203195233295, guid: 9cca739ae72db4819b2f67ffa4e6d8ad, type: 3}
-    count: 10
+    count: 20
   - block: {fileID: 2590600669893066528, guid: 738dadb34a8ff4256813f3491de51de0, type: 3}
-    count: 8
+    count: 20
   - block: {fileID: 4250765640128295589, guid: b1d0551f1701442f0b5dca5d4e5ace52, type: 3}
-    count: 6
+    count: 20
   - block: {fileID: 6412738775131923550, guid: 673b26d5040ef4e70a9134cf9816d794, type: 3}
     count: 20
   - block: {fileID: 8702450637185090464, guid: 9804240161ba144da919df7021ac182a, type: 3}
-    count: 6
+    count: 20
   - block: {fileID: 4965229658855763538, guid: 8cbe8dab689734dda9d60f8bc41f8c36, type: 3}
-    count: 4
+    count: 10
   - block: {fileID: 8875715161156386245, guid: 4b175ac8eb0b14abe8c9c85551a27d95, type: 3}
-    count: 8
+    count: 20
   - block: {fileID: 1014606775926654745, guid: 0d0ad41b7ab514a498eb497dccd40957, type: 3}
     count: 2
   baseBlockUIPrefab: {fileID: 2511184181777711340, guid: 2b732118bb3154107a6089cf0ff42579, type: 3}
@@ -746,8 +746,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 713930872}
-  - component: {fileID: 713930871}
   - component: {fileID: 713930870}
+  - component: {fileID: 713930873}
   m_Layer: 0
   m_Name: LevelCompletion
   m_TagString: Untagged
@@ -781,19 +781,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
---- !u!114 &713930871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713930869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02d0592815e644bb8fe827410848d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelCompletion: {fileID: 2057046863}
 --- !u!4 &713930872
 Transform:
   m_ObjectHideFlags: 0
@@ -809,6 +796,20 @@ Transform:
   m_Father: {fileID: 1544725682}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &713930873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713930869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe6b9df041e6425fad71dcd484ae44f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelCompletion: {fileID: 2057046863}
+  triggerTag: ControlBlock
 --- !u!1001 &750530395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1298,6 +1299,7 @@ GameObject:
   - component: {fileID: 1014531645}
   - component: {fileID: 1014531644}
   - component: {fileID: 1014531643}
+  - component: {fileID: 1014531647}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2299,6 +2301,27 @@ Transform:
   m_Father: {fileID: 1544725682}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1014531647
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014531642}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!4 &1018411669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4153036733511978310, guid: 3735b1e2fbe20426da19edaaa83d686b, type: 3}

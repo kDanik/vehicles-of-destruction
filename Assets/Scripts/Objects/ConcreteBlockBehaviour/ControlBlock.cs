@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class ControlBlock : MonoBehaviour
 {
+    public static readonly string ControlBlockTag = "ControlBlock";
 
     [SerializeField]
     private GameObject lightsContainer;
@@ -20,6 +21,7 @@ public class ControlBlock : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.tag = ControlBlockTag;
         rigidbodyBuffer = GetComponent<Rigidbody2D>();
 
         StartCoroutine(UpdateScreenText());

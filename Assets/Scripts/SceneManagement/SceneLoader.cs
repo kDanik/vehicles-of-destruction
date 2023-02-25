@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class SceneLoader : MonoBehaviour
 {
+    [Tooltip("Scriptable object that contains information about all levels")]
     [SerializeField] private LevelsData levelsData;
     private LevelLoader levelLoader;
 

@@ -2,9 +2,9 @@
 
 public class SceneStateUI
 {
-    private GameObject[] editorStateUI;
-    private GameObject[] levelCompletedStateUI;
-    private GameObject[] playmodeStateUI;
+    private readonly GameObject[] editorStateUI;
+    private readonly GameObject[] levelCompletedStateUI;
+    private readonly GameObject[] playmodeStateUI;
 
     public SceneStateUI(GameObject[] editorStateUI, GameObject[] levelCompletedStateUI, GameObject[] playmodeStateUI)
     {

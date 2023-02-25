@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Manages writes and reads for level completion data (Stored in PlayerPrefs)
+/// Manages the writes and reads for level completion data (Stored in PlayerPrefs)
 /// </summary>
 public class LevelCompletionApi
 {
@@ -30,7 +30,7 @@ public class LevelCompletionApi
 
     /// <summary>
     /// Resets all saved preferences for levels from levelsData to default (not completed) value.
-    /// This probably only should be used for development 
+    /// This only should be used for development 
     /// </summary>
     /// <param name="levelsData"></param>
     public static void ResetLevelPrefs(LevelsData levelsData)

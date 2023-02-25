@@ -55,6 +55,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 3167202203195233295, guid: 9cca739ae72db4819b2f67ffa4e6d8ad, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 6200000, guid: 9ce2d324182bd45b4945da1ec0a50780, type: 2}
+    instantiationMode: 0
   - dependency: {fileID: 11400000, guid: dc027b622f4e543ebbfc7e9deee4970f, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
