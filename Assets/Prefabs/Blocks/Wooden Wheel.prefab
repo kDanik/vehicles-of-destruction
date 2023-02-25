@@ -206,8 +206,8 @@ WheelJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 2590600669427900110}
-  m_BreakForce: 5000
-  m_BreakTorque: Infinity
+  m_BreakForce: 2000
+  m_BreakTorque: 1000
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: -0.05}
   m_ConnectedAnchor: {x: 0, y: 0}

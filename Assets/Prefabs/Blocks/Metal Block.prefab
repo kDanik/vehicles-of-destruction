@@ -103,8 +103,8 @@ MonoBehaviour:
   allowLeftJoint: 1
   allowRightJoint: 1
   allowBottomJoint: 1
-  JointBreakForce: 2000
-  JointBreakTorque: 1200
+  JointBreakForce: 6000
+  JointBreakTorque: 3500
   BlockTypeName: Metal Block
   BlockUISprite: {fileID: 433834141, guid: a376e5df8b68941058a5747d784f06c3, type: 3}
   rotation: 0
