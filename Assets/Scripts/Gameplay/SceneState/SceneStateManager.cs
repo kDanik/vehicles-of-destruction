@@ -19,6 +19,10 @@ public class SceneStateManager : MonoBehaviour
     private CinemachineVirtualCamera virtualCamera;
 
     [SerializeField]
+    [Tooltip("Cinemachine camera for level overview")]
+    private CinemachineVirtualCamera virtualCameraLevelOverview;
+
+    [SerializeField]
     [Tooltip("Script for vehicle editor. (Also parent object of editor grid)")]
     private VehicleEditor editor;
 
@@ -48,10 +52,33 @@ public class SceneStateManager : MonoBehaviour
         dynamicObjectsBuffer.SetActive(false);
 
         cameraController = gameObject.AddComponent<CameraController>();
-        cameraController.Initialize(virtualCamera);
+        cameraController.Initialize(virtualCamera, virtualCameraLevelOverview, editor);
+
 
         sceneStateUI = new SceneStateUI(editorUIElements, levelCompletedUIElements, playmodeUIElements);
+
+        StartCoroutine(PlayLevelOverview());
     }
+
+
+
+    public IEnumerator PlayLevelOverview() {
+        editor.DeactivateEditor();
+        sceneStateUI.DeactivateEditorStateUI();
+
+        yield return cameraController.StartCoroutine(cameraController.PlayLevelOverview());
+
+        OnLevelOverviewEnd();
+    }
+
+    private void OnLevelOverviewEnd()
+    {
+        cameraController.OnLevelOverviewEnd();
+
+        SwitchToEditorMode();
+    }
+
+
 
     /// <summary>
     /// Switches game state to editor by activating editor, destroying vehicle and reloading dynamic objects

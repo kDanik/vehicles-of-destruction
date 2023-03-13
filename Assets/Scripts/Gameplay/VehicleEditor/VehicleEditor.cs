@@ -112,6 +112,14 @@ public class VehicleEditor : MonoBehaviour
         editorProcessor.ProcessEditorGrid(editorGrid);
     }
 
+    public Vector3 GetCenterOfEditorGrid() {
+        Vector3 center = transform.position;
+        center.x += editorWidth / 2f;
+        center.y += editorHeight / 2f - 1f;
+
+        return center;
+    }
+
     private void ChangeFocus(Vector2Int newFocusPositionInGrid)
     {
         // if not focused than there is no point in changing focus state of object

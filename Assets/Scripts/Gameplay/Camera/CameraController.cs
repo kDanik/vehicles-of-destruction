@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
@@ -9,16 +10,41 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private CinemachineVirtualCamera cinemachineVirtualCamera;
+    private CinemachineVirtualCamera cinemachineVirtualLevelOverviewCamera;
+
     private CinemachineTargetGroup targetGroup;
 
     private List<Transform> targetObjects;
-    private Vector3 editorPositionBuffer;
+    private VehicleEditor vehicleEditor;
 
-    public void Initialize(CinemachineVirtualCamera cinemachineVirtualCamera)
+    public void Initialize(CinemachineVirtualCamera cinemachineVirtualCamera, CinemachineVirtualCamera cinemachineVirtualLevelOverviewCamera, VehicleEditor vehicleEditor)
     {
         this.cinemachineVirtualCamera = cinemachineVirtualCamera;
-        editorPositionBuffer = transform.position;
+        this.cinemachineVirtualLevelOverviewCamera = cinemachineVirtualLevelOverviewCamera;
+
+        this.vehicleEditor = vehicleEditor;
         targetObjects = new List<Transform>();
+    }
+
+
+    public IEnumerator PlayLevelOverview()
+    {
+        cinemachineVirtualCamera.enabled = false;
+        cinemachineVirtualLevelOverviewCamera.enabled = true;
+
+        Animator animator = cinemachineVirtualLevelOverviewCamera.GetComponent<Animator>();
+
+        animator.Play("LevelOverview");
+
+        yield return new WaitForSeconds(0.5f);
+
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+    }
+
+    public void OnLevelOverviewEnd()
+    {
+        cinemachineVirtualCamera.enabled = true;
+        cinemachineVirtualLevelOverviewCamera.enabled = false;
     }
 
     /// <summary>
@@ -29,7 +55,10 @@ public class CameraController : MonoBehaviour
         DestroyImmediate(targetGroup);
         targetObjects.Clear();
 
-        cinemachineVirtualCamera.transform.position = editorPositionBuffer;
+        Vector3 centerOFEditor = vehicleEditor.GetCenterOfEditorGrid();
+        centerOFEditor.z = -10;
+
+        cinemachineVirtualCamera.transform.position = centerOFEditor;
 
         cinemachineVirtualCamera.m_Lens.OrthographicSize = 5;
     }
@@ -39,9 +68,6 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public void SwitchCameraToPlayMode(GameObject vehicleParent)
     {
-
-        editorPositionBuffer = cinemachineVirtualCamera.transform.position;
-
         targetGroup = cinemachineVirtualCamera.gameObject.AddComponent<CinemachineTargetGroup>();
 
         foreach (Transform child in vehicleParent.transform)
