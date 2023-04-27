@@ -16,7 +16,7 @@ public class EditorCell : MonoBehaviour
 
     public void Initialize(Vector2Int positionInEditorGrid, VehicleEditor vehicleEditor)
     {
-        this.PositionInEditorGrid = positionInEditorGrid;
+        PositionInEditorGrid = positionInEditorGrid;
         this.vehicleEditor = vehicleEditor;
     }
 

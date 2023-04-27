@@ -114,8 +114,32 @@ public class EditorProcessor : MonoBehaviour
     /// </summary>
     private void SetJointStrength(Joint2D joint, BlockConfiguration blockScript1, BlockConfiguration blockScript2)
     {
-        joint.breakForce = (blockScript1.JointBreakForce + blockScript2.JointBreakForce) / 2;
-        joint.breakTorque = (blockScript1.JointBreakTorque + blockScript2.JointBreakTorque) / 2;
+        int minForce, maxForce, maxTorque, minTorque;
+        if (blockScript1.JointBreakForce > blockScript2.JointBreakForce)
+        {
+            minForce = blockScript2.JointBreakForce;
+            maxForce = blockScript1.JointBreakForce;
+        }
+        else {
+            minForce = blockScript1.JointBreakForce;
+            maxForce = blockScript2.JointBreakForce;
+        }
+
+        if (blockScript1.JointBreakTorque > blockScript2.JointBreakTorque)
+        {
+            minTorque = blockScript2.JointBreakTorque;
+            maxTorque = blockScript1.JointBreakTorque;
+        }
+        else
+        {
+            minTorque = blockScript1.JointBreakTorque;
+            maxTorque = blockScript2.JointBreakTorque;
+        }
+
+        joint.breakForce = maxForce - ((maxForce - minForce) / 2);
+
+
+        joint.breakTorque = maxTorque - ((maxTorque - minTorque) / 2);
     }
 
     /// <summary>

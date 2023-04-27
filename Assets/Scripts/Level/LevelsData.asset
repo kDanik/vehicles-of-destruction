@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LevelsData
   m_EditorClassIdentifier: 
   levels:
-  - LevelId: 0
-    SceneName: EditorScene
+  - SceneName: Level 1
+    isEmpty: 0
+  - SceneName: EditorScene
     isEmpty: 0

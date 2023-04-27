@@ -70,7 +70,7 @@ public class VehicleEditor : MonoBehaviour
 
     public void OnDragOutsideOfGrid(Vector2Int positionInEditorGrid)
     {
-        if (editorGrid.GetBlockWithoutWrapper(positionInEditorGrid.x, positionInEditorGrid.y).CompareTag("ControlBlock"))
+            if (editorGrid.GetBlockWithoutWrapper(positionInEditorGrid.x, positionInEditorGrid.y).CompareTag("ControlBlock"))
         {
             // if block is control block deletion shouldn't be allowed
             editorGrid.GetBlock(positionInEditorGrid.x, positionInEditorGrid.y).GetComponent<EditorBlock>().DragFail();

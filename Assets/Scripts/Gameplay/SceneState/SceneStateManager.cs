@@ -38,6 +38,10 @@ public class SceneStateManager : MonoBehaviour
     [Tooltip("UI elements that are specific for level completed state")]
     private GameObject[] levelCompletedUIElements;
 
+    [SerializeField]
+    [Tooltip("UI elements for starting and stoping level")]
+    private GameObject[] startStopBar;
+
     private SceneStateUI sceneStateUI;
 
     private GameObject dynamicObjectsBuffer;
@@ -55,7 +59,7 @@ public class SceneStateManager : MonoBehaviour
         cameraController.Initialize(virtualCamera, virtualCameraLevelOverview, editor);
 
 
-        sceneStateUI = new SceneStateUI(editorUIElements, levelCompletedUIElements, playmodeUIElements);
+        sceneStateUI = new SceneStateUI(editorUIElements, levelCompletedUIElements, playmodeUIElements, startStopBar);
 
         StartCoroutine(PlayLevelOverview());
     }
@@ -65,6 +69,8 @@ public class SceneStateManager : MonoBehaviour
     public IEnumerator PlayLevelOverview() {
         editor.DeactivateEditor();
         sceneStateUI.DeactivateEditorStateUI();
+        sceneStateUI.DeactivateStartStopBar();
+        dynamicObjects.BroadcastMessage("OnPlaymodeStart", SendMessageOptions.DontRequireReceiver);
 
         yield return cameraController.StartCoroutine(cameraController.PlayLevelOverview());
 
@@ -75,9 +81,9 @@ public class SceneStateManager : MonoBehaviour
     {
         cameraController.OnLevelOverviewEnd();
 
+        sceneStateUI.ActivateStartStopBar();
         SwitchToEditorMode();
     }
-
 
 
     /// <summary>
@@ -94,6 +100,7 @@ public class SceneStateManager : MonoBehaviour
 
 
         sceneStateUI.ActivateEditorStateUI();
+        sceneStateUI.DeactivatePlaymodeStateUI();
     }
 
     /// <summary>
@@ -109,6 +116,7 @@ public class SceneStateManager : MonoBehaviour
         cameraController.SwitchCameraToPlayMode(GameObject.Find("VehicleParent"));
 
         sceneStateUI.DeactivateEditorStateUI();
+        sceneStateUI.ActivatePlaymodeStateUI();
 
         StartCoroutine(BroadcastPlaymodeStartMessage());
     }
@@ -131,6 +139,7 @@ public class SceneStateManager : MonoBehaviour
 
         sceneStateUI.DeactivateEditorStateUI();
         sceneStateUI.DeactivatePlaymodeStateUI();
+        sceneStateUI.DeactivateStartStopBar();
         sceneStateUI.ActivateLevelCompletedStateUI();
     }
 
